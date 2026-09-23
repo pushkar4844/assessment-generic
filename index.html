@@ -8,52 +8,960 @@
 </head>
 <body>
 
-<header>
+<header class="site-header">
   <h1>Assessment Call Toolkit</h1>
-  <p>AWS Cloud Internet Breakout &mdash; click a box to open its contents</p>
+  <p>AWS Cloud Internet Breakout &mdash; assessment call prep, in order</p>
+  <nav class="quicknav">
+    <a href="#intro">1. Opening Introduction</a>
+    <a href="#notes">2. Speaking Notes</a>
+    <a href="#aws-services">3. AWS Services Reference</a>
+    <a href="#breakout">4. Cloud Internet Breakout</a>
+  </nav>
 </header>
 
 <div class="wrap">
-  <div class="grid" id="grid">
-    <button class="box" data-key="intro" type="button">
-      <span class="box-num">01</span>
-      <span class="box-title">Opening Introduction</span>
-      <span class="box-desc">How to open the call and set the tone.</span>
-      <span class="box-arrow" aria-hidden="true">&#8594;</span>
-    </button>
-    <button class="box" data-key="notes" type="button">
-      <span class="box-num">02</span>
-      <span class="box-title">Speaking Notes</span>
-      <span class="box-desc">Full talk track for the call opening.</span>
-      <span class="box-arrow" aria-hidden="true">&#8594;</span>
-    </button>
-    <button class="box" data-key="aws-services" type="button">
-      <span class="box-num">03</span>
-      <span class="box-title">AWS Services Reference</span>
-      <span class="box-desc">Field SA guide: discovery questions.</span>
-      <span class="box-arrow" aria-hidden="true">&#8594;</span>
-    </button>
-    <button class="box" data-key="breakout" type="button">
-      <span class="box-num">04</span>
-      <span class="box-title">Cloud Internet Breakout</span>
-      <span class="box-desc">Assessment interview playbook.</span>
-      <span class="box-arrow" aria-hidden="true">&#8594;</span>
-    </button>
-  </div>
-</div>
 
-<footer>Click any box to view the full content. Press Esc or click outside to close.</footer>
-
-<div class="overlay" id="overlay" hidden>
-  <div class="panel">
-    <div class="panel-bar">
-      <h2 id="panel-title">&nbsp;</h2>
-      <button class="close-btn" id="closeBtn" type="button">Close &#10005;</button>
+  <section class="block" id="intro">
+    <div class="block-head">
+      <h2><span class="block-num">01</span> Opening Introduction</h2>
+      <p class="block-desc">How to open the call and set the tone.</p>
     </div>
-    <iframe id="contentFrame" title="Content"></iframe>
+    <div class="content-intro">
+      <div class="container">
+<!-- INTRO -->
+  <section class="panel" data-tab="intro">
+    <div class="panel-title-row">
+      <h2 class="panel-title">The Intro</h2>
+      <span class="time-badge">First 2 minutes — set the tone</span>
+    </div>
+    <blockquote>"Hi everyone, thank you for taking the time today. My name is Pushkar Patil — I'm a Cloud Engineer with AWS Professional Services. I specialize in network architecture and security for cloud environments, and I've been working with customers on AWS infrastructure design, security posture assessments, and internet breakout architectures."</blockquote>
+    <blockquote>"Before we jump into the technical details, I want to take a couple of minutes to set the context for what we're doing here and how we'll work together."</blockquote>
+  </section>
+
+  <!-- BUILD TRUST -->
+  <section class="panel" data-tab="trust">
+    <div class="panel-title-row">
+      <h2 class="panel-title">Build Trust — Show You Understand Their World</h2>
+      <span class="time-badge">Next 3 minutes</span>
+    </div>
+    <blockquote>"I understand you're looking at your AWS Cloud Internet Breakout environment — how your workloads connect to the internet, how that traffic is secured, and whether the architecture is aligned with best practices. This is one of the most critical areas in any cloud environment because it's where your internal workloads meet the public internet. Getting this right has a direct impact on your security posture, compliance readiness, and operational resilience."</blockquote>
+    <blockquote>"I want to be upfront about how we approach this — this is NOT an audit. We're not here to grade you or find fault. We're here as your partner to give you a clear, honest picture of where things stand today, and more importantly, a practical roadmap to get where you want to be."</blockquote>
+    <blockquote>"Every organization has gaps — that's normal, especially as cloud environments grow and evolve. What matters is knowing where they are and having a plan."</blockquote>
+  </section>
+
+  <!-- CREDIBILITY -->
+  <section class="panel" data-tab="credibility">
+    <div class="panel-title-row">
+      <h2 class="panel-title">Establish Credibility — Frameworks</h2>
+      <span class="time-badge">Next 2 minutes</span>
+    </div>
+    <blockquote>"Our assessment is built on the same frameworks AWS uses with enterprise customers globally:"</blockquote>
+    <blockquote>"First, the AWS Cloud Adoption Framework — specifically the Security Perspective. This gives us the organizational view — governance, identity, threat detection, infrastructure protection, incident response. It's how we measure security maturity."</blockquote>
+    <blockquote>"Second, the AWS Well-Architected Framework — Security Pillar. This is the workload-level lens. It looks at how your architecture decisions impact security. Together with CAF, we're covering both the big picture and the details."</blockquote>
+    <blockquote>"For your internet breakout specifically, we'll benchmark against the AWS Security Reference Architecture — this is AWS's prescriptive design for how network traffic should flow through centralized inspection, egress filtering, and segmented VPCs. It's the gold standard."</blockquote>
+    <blockquote>"And for configuration hardening, we'll use the CIS AWS Foundations Benchmark — the latest version. This gives us 39 automated controls that Security Hub can continuously monitor after we're done."</blockquote>
+    <blockquote>"So you're not just getting our opinion — you're getting an assessment grounded in industry-recognized standards."</blockquote>
+  </section>
+
+  <!-- EXPECTATIONS -->
+  <section class="panel" data-tab="expectations">
+    <div class="panel-title-row">
+      <h2 class="panel-title">Set Expectations — What They Get</h2>
+      <span class="time-badge">Next 2 minutes</span>
+    </div>
+    <blockquote>"Here's what you'll walk away with at the end of this engagement:"</blockquote>
+    <ul>
+      <li><blockquote>"A scored assessment workbook — every area rated on a 1-5 maturity scale with Red, Amber, Green status. You'll see exactly where you're strong and where the gaps are."</blockquote></li>
+      <li><blockquote>"A findings tracker with severity ratings, business impact, and specific remediation steps — not generic advice, but actionable recommendations tailored to your environment."</blockquote></li>
+      <li><blockquote>"An executive summary dashboard your leadership can use to understand the security posture at a glance."</blockquote></li>
+      <li><blockquote>"And a prioritized remediation roadmap — because fixing everything at once isn't realistic. We'll help you sequence what matters most."</blockquote></li>
+    </ul>
+  </section>
+
+  <!-- COLLABORATIVE -->
+  <section class="panel" data-tab="collaborative">
+    <div class="panel-title-row">
+      <h2 class="panel-title">Make It Collaborative — Ask Them</h2>
+      <span class="time-badge">Next 2 minutes</span>
+    </div>
+    <blockquote>"Before we dive in, I'd love to hear from you:"</blockquote>
+    <blockquote>"What's driving this assessment? Is it a compliance requirement, a security concern, a leadership initiative, or are you planning changes to your architecture?"</blockquote>
+    <div class="stage-note"><em>(Let them talk. Listen. This tells you everything about their priorities.)</em></div>
+    <blockquote>"Are there specific areas you're most concerned about or want us to focus on?"</blockquote>
+    <div class="stage-note"><em>(This makes them feel heard and gives you the priority order.)</em></div>
+    <blockquote>"Who are the key stakeholders we should involve — network team, security team, identity team, operations?"</blockquote>
+    <div class="stage-note"><em>(This shows you respect their org structure and want to include the right people.)</em></div>
+  </section>
+
+  <!-- CLOSE -->
+  <section class="panel" data-tab="close">
+    <div class="panel-title-row">
+      <h2 class="panel-title">Close the Intro — Transition to Assessment</h2>
+      <span class="time-badge">Wrap-up</span>
+    </div>
+    <blockquote>"Perfect. That's really helpful context. Here's how I'd like to structure our conversation today — we'll start from the foundation and work our way through layer by layer:"</blockquote>
+    <blockquote>"We'll begin with your account structure and governance — how your AWS environment is organized. Then we'll move into network architecture and the internet breakout path. From there, we'll look at the security controls on that path, identity and access, data protection, monitoring, and incident response."</blockquote>
+    <blockquote>"Each layer builds on the previous one, so by the end we'll have a complete picture."</blockquote>
+    <blockquote>"I'll be taking notes as we go and mapping everything to our assessment workbook. If at any point something isn't clear or you want to go deeper on a topic, just say so — this is your assessment."</blockquote>
+    <blockquote>"Ready to get started?"</blockquote>
+  </section>
+
+  <!-- CHEAT SHEET -->
+  <section class="panel" data-tab="cheatsheet">
+    <div class="panel-title-row">
+      <h2 class="panel-title">Cheat Sheet — Trust Phrases to Drop Naturally</h2>
+    </div>
+    <ul class="phrase-list">
+      <li><span class="quote">"We see this across many customers at your scale..."</span><span class="why">— normalizes their gaps</span></li>
+      <li><span class="quote">"That's actually a common pattern we encounter..."</span><span class="why">— removes shame</span></li>
+      <li><span class="quote">"The good news is this is straightforward to fix..."</span><span class="why">— gives hope</span></li>
+      <li><span class="quote">"AWS has a native service for exactly this..."</span><span class="why">— shows you know the platform</span></li>
+      <li><span class="quote">"Based on what we've seen work well for similar environments..."</span><span class="why">— positions you as experienced</span></li>
+      <li><span class="quote">"Let me show you what the reference architecture recommends here..."</span><span class="why">— grounds advice in AWS standards</span></li>
+      <li><span class="quote">"This is one of the highest-impact improvements you can make..."</span><span class="why">— helps them prioritize</span></li>
+      <li><span class="quote">"Your team has done solid work here..."</span><span class="why">— acknowledge what's working, don't just find problems</span></li>
+    </ul>
+  </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="notes">
+    <div class="block-head">
+      <h2><span class="block-num">02</span> Speaking Notes</h2>
+      <p class="block-desc">Full talk track for the call opening.</p>
+    </div>
+    <div class="content-notes">
+      <div class="container">
+<!-- 1. SET THE STAGE -->
+  <section class="panel" data-tab="s1">
+    <h2 class="panel-title">1. Set the Stage — Why We're Here</h2>
+    <blockquote>"Thank you for making time today. The purpose of this engagement is to perform an independent technical assessment of your AWS Cloud Internet Breakout environment — your network architecture, security controls, and operational readiness. Our goal is to give you a clear picture of where you stand today, where the gaps are, and a prioritized roadmap to close them."</blockquote>
+    <blockquote>"This isn't an audit. This is a partnership. We want to help you build confidence that your cloud environment is secure, resilient, and aligned with industry best practices."</blockquote>
+  </section>
+
+  <!-- 2. FRAMEWORKS -->
+  <section class="panel" data-tab="s2">
+    <h2 class="panel-title">2. Frameworks We're Using — Build Trust</h2>
+
+    <h3>AWS Cloud Adoption Framework (CAF) — Security Perspective</h3>
+    <blockquote>"Our assessment is grounded in the AWS Cloud Adoption Framework, specifically the Security Perspective. This is the same framework AWS uses with thousands of enterprise customers globally. It organizes security into 9 capabilities — from identity management to incident response — and gives us a structured way to measure your maturity."</blockquote>
+    <div class="drop"><strong>Drop this:</strong> "The CAF Security Perspective covers Security Governance, Security Assurance, Identity &amp; Access Management, Threat Detection, Vulnerability Management, Infrastructure Protection, Data Protection, Application Security, and Incident Response."</div>
+
+    <h3>AWS Well-Architected Framework — Security Pillar</h3>
+    <blockquote>"We'll also be leveraging the AWS Well-Architected Framework, specifically the Security Pillar. This is AWS's own lens for evaluating workload-level architecture decisions. It covers 5 focus areas — Identity &amp; Access Management, Detection, Infrastructure Protection, Data Protection, and Incident Response. Think of CAF as the organizational view and Well-Architected as the workload view — we're covering both."</blockquote>
+    <div class="drop"><strong>Drop this:</strong> "The Well-Architected Tool is available free in the AWS Console. After our assessment, you can run ongoing reviews yourself."</div>
+
+    <h3>AWS Security Reference Architecture (SRA)</h3>
+    <blockquote>"For your network and internet breakout design specifically, we're benchmarking against the AWS Security Reference Architecture. This is AWS's prescriptive multi-account architecture that defines how inbound, outbound, and inspection VPCs should be structured — with centralized Network Firewall, Transit Gateway routing, and dedicated security tooling accounts. This is the gold standard for how internet breakout should look."</blockquote>
+    <div class="drop"><strong>Drop this:</strong> "The SRA recommends a dedicated Network account with three VPCs — Inbound, Outbound, and Inspection — with AWS Network Firewall in the inspection VPC handling all traffic."</div>
+
+    <h3>CIS AWS Foundations Benchmark v5.0.0</h3>
+    <blockquote>"For compliance and configuration hardening, we're using the CIS AWS Foundations Benchmark version 5.0.0 — the latest version. This is an industry-accepted standard with clear, step-by-step controls. AWS Security Hub natively supports this benchmark, so after our assessment, you can enable automated compliance monitoring against these controls."</blockquote>
+    <div class="drop"><strong>Drop this:</strong> "CIS v5.0.0 covers 39 automated controls across IAM, logging, monitoring, networking, and storage. Security Hub can continuously evaluate your environment against these."</div>
+
+    <h3>NIST Cybersecurity Framework (CSF)</h3>
+    <blockquote>"Where applicable, we'll also map findings to the NIST Cybersecurity Framework — Identify, Protect, Detect, Respond, Recover. Many of our customers need this mapping for regulatory or board-level reporting. It gives your leadership a common language to understand security posture."</blockquote>
+
+    <h3>ProServe Security Assessment Methodology</h3>
+    <blockquote>"Our assessment methodology follows the same approach used by AWS Professional Services across hundreds of enterprise engagements. We assess across 5 Core Epics aligned to the CAF Security Perspective — Identity &amp; Access Management, Infrastructure Security, Data Protection, Detective Controls, and Incident Response. Each area is scored on a 1-5 maturity scale, giving you a quantifiable baseline."</blockquote>
+  </section>
+
+  <!-- 3. WHAT WE'LL DELIVER -->
+  <section class="panel" data-tab="s3">
+    <h2 class="panel-title">3. What We'll Deliver — Set Expectations</h2>
+    <blockquote>"By the end of this engagement, you'll receive:"</blockquote>
+    <ul>
+      <li>A comprehensive assessment workbook with every control scored 1-5 and RAG-rated (Red/Amber/Green)</li>
+      <li>A findings tracker with severity, business impact, and remediation recommendations</li>
+      <li>An executive dashboard summarizing your security posture across all domains</li>
+      <li>A prioritized remediation roadmap with owners and target timelines</li>
+      <li>Mapping to CIS, NIST, and Well-Architected best practices</li>
+    </ul>
+    <blockquote>"This gives your team a clear, actionable plan — not just a list of problems."</blockquote>
+  </section>
+
+  <!-- 4. HOW WE'LL WORK -->
+  <section class="panel" data-tab="s4">
+    <h2 class="panel-title">4. How We'll Work — The Process</h2>
+    <blockquote>"Our approach has three phases:"</blockquote>
+    <div class="phase">
+      <strong>Phase 1 — Discovery</strong>
+      We'll conduct structured interviews with your network, security, identity, and operations teams. We'll walk through your architecture, review configurations, and understand your current tooling.
+    </div>
+    <div class="phase">
+      <strong>Phase 2 — Analysis</strong>
+      We'll analyze what we've gathered, score each area against the frameworks, identify gaps, and develop recommendations. Where possible, we'll use tools like Prowler, AWS Config, and Security Hub to validate findings.
+    </div>
+    <div class="phase">
+      <strong>Phase 3 — Readout &amp; Roadmap</strong>
+      We'll present findings to your team, walk through the prioritized recommendations, and align on next steps. This isn't a hand-off — we'll iterate with you.
+    </div>
+  </section>
+
+  <!-- 5. WHAT WE NEED -->
+  <section class="panel" data-tab="s5">
+    <h2 class="panel-title">5. What We Need From You — Ask</h2>
+    <blockquote>"To make this successful, we'll need:"</blockquote>
+    <ul>
+      <li>Access to your architecture diagrams (or we'll help you build them)</li>
+      <li>Time with your network, security, and identity teams (2-3 hours per domain)</li>
+      <li>Read-only access to your AWS environment for validation (Config, Security Hub, CloudTrail)</li>
+      <li>A point of contact to coordinate scheduling</li>
+    </ul>
+    <blockquote>"We respect your time. We'll come prepared with specific questions for each session so we're efficient."</blockquote>
+  </section>
+
+  <!-- 6. TRUST BUILDERS -->
+  <section class="panel" data-tab="s6">
+    <h2 class="panel-title">6. Trust Builders — Drop These Naturally</h2>
+
+    <h3>On shared responsibility</h3>
+    <blockquote>"AWS secures the cloud infrastructure — the physical data centers, the hypervisor, the global network. Your responsibility is securing what you put IN the cloud — your configurations, your data, your access controls. Our job is to help you nail that 'in the cloud' piece."</blockquote>
+
+    <h3>On why this matters now</h3>
+    <blockquote>"The internet breakout path is the most critical attack surface in any cloud environment. It's where your workloads touch the public internet. Getting this right — centralized inspection, egress filtering, DDoS protection — is foundational to everything else."</blockquote>
+
+    <h3>On our approach</h3>
+    <blockquote>"We're not here to find fault. We're here to find opportunity. Every organization has gaps — what matters is knowing where they are and having a plan to close them."</blockquote>
+
+    <h3>On benchmarking</h3>
+    <blockquote>"We'll show you not just where you are, but where you should be. Our scoring is based on what we see across hundreds of AWS customers in similar industries and at similar scale."</blockquote>
+  </section>
+
+  <!-- 7. QUICK REFERENCE -->
+  <section class="panel" data-tab="s7">
+    <h2 class="panel-title">7. Framework Quick Reference — Cheat Sheet</h2>
+    <ul>
+      <li><strong>AWS CAF Security Perspective</strong> — 9 capabilities, organizational-level security maturity</li>
+      <li><strong>AWS Well-Architected Security Pillar</strong> — 5 focus areas, workload-level architecture review</li>
+      <li><strong>AWS Security Reference Architecture (SRA)</strong> — Prescriptive multi-account network + security design</li>
+      <li><strong>CIS AWS Foundations Benchmark v5.0.0</strong> — 39 automated configuration controls</li>
+      <li><strong>NIST CSF</strong> — Identify, Protect, Detect, Respond, Recover (regulatory mapping)</li>
+      <li><strong>ProServe 5 Core Epics</strong> — IAM, Infrastructure Security, Data Protection, Detective Controls, Incident Response</li>
+    </ul>
+  </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="aws-services">
+    <div class="block-head">
+      <h2><span class="block-num">03</span> AWS Services Reference</h2>
+      <p class="block-desc">Field SA guide: discovery questions.</p>
+    </div>
+    <div class="content-aws">
+      <div class="container">
+<!-- STRATEGY -->
+  <section class="panel" data-tab="strategy">
+    <h2 class="panel-title">Strategy</h2>
+    <ul>
+      <li>How does the system support the customer's business? (e.g. CRM logs customer interactions and integrates with ERP for fulfillment)</li>
+      <li>How does the system scale as the business grows? What are the growth constraints? (e.g. servers, storage, people)</li>
+      <li>How does the system handle business continuity?</li>
+      <li>What are the technologies used in the system? (e.g. Oracle, OpenJDK, Javascript, Linux, VMWare)</li>
+      <li>How does the system integrate with other systems? (web hooks, integration broker, etc)</li>
+      <li>What are the peak performance metrics for the system? When does the system require peak performance? (e.g. maximum transactions per second, maximum tenants per cluster, etc)</li>
+      <li>What teams support the systems? (e.g. development, operations, DBA)</li>
+      <li>How does the team build and deploy the system? (e.g. Gradle, Jenkins, Ansible)</li>
+      <li>How do the teams test the systems? (e.g. manual, automated functional regression, unit tests, integration tests)</li>
+      <li>How does the team monitor the system for security, application, and performance incidents?</li>
+      <li>What are the system's incident response processes?</li>
+      <li>How do the team predict failure or service level violations? (e.g. AIOps)</li>
+      <li>How do you support the end users of the system? (e.g. ticketing systems, call/contact center)</li>
+      <li>How could the system generate more value if augmented with AI/ML?</li>
+      <li>Could the system's data provide insights to increase efficiency, drive growth via cross/upsell opportunities, etc.?</li>
+    </ul>
+
+    <h3>Technology Landscape</h3>
+    <ul>
+      <li>How does the technology organization serve the business? Are there dedicated teams for each business unit? Does a single team serve all the business units?</li>
+      <li>What regulatory constraints do you have? (e.g. HIPAA compliance, Office of the Comptroller of the Currency (OCC) audits, FINRA compliance, etc)</li>
+      <li>What drives the buy vs build decision? (e.g. customer buys accounting and HR systems but builds development tools)</li>
+      <li>Do you have an AI and ML strategy for augmenting or automating your business processes? (automating document workflows, information retrieval from unstructured data, etc)</li>
+      <li>Do you have a strategy to derive business insights from your data? (e.g. a "Customer 360" strategy by pulling data from CRM, customer success, and ERP system into a single view and data lake)</li>
+      <li>Do you have a strategy to monetize your data? (e.g. improving credit quality decisions using payment data, improving rating models through driver telematics, predictive maintenance program through IoT and service history)</li>
+      <li>What is your overall application integration strategy? (Enterprise service bus/integration broker (Mulesoft, Informatica, Boomi), point to point, etc.)</li>
+      <li>What is the software delivery process? (Scrum, Agile, XP, Waterfall)</li>
+      <li>What do you use for development tools, databases, application monitoring tools, security monitoring tools, continuous integration (CI), continuous delivery (CD)?</li>
+      <li>What percentage of technology infrastructure is in the cloud? What percentage is in AWS?</li>
+      <li>Does your IT strategy explicitly state cloud's role and how it is tied to your business objectives?</li>
+      <li>Where do you want to invest in infrastructure – innovation vs. application outcomes?</li>
+      <li>Are you aligning strategy on both cost out and innovation?</li>
+    </ul>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="panel" data-tab="security">
+    <h2 class="panel-title">Security</h2>
+    <ul>
+      <li>What are the security compliance requirements? (SOC2, ISO 27001, HIPAA, etc)</li>
+      <li>Does your organization have a security and compliance program?</li>
+      <li>What tools or services are being used for security control?</li>
+      <li>What regulations does your organization need to comply with?</li>
+      <li>How would you characterize your organization's approach to security and compliance? Do you find it effective and efficient at managing risk?</li>
+      <li>To what extent are you incorporating data analytics into your operational risk management program?</li>
+      <li>Are there risk and compliance management practices that you feel would benefit from a more data driven approach?</li>
+      <li>What are the most resource intensive areas of your security and compliance program?</li>
+      <li>What are the main cost drivers, and where do you see opportunities for increased automation of manual processes?</li>
+      <li>At a high level, how would you characterize your organization's approach to security and compliance? How integrated and consistent would you say it is across lines of business?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Do you currently have central pane of glass view into your AWS security posture?</li>
+      <li>Do you currently or plan on storing or processing protected data?</li>
+      <li>What 3rd party products are you currently using on premise / on AWS?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A27&amp;tab=view_all">Kiku Learning Library — Security</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon Cognito: <a href="https://aws.amazon.com/cognito/">aws.amazon.com/cognito/</a></li>
+      <li>Amazon Detective: <a href="https://aws.amazon.com/detective">aws.amazon.com/detective</a></li>
+      <li>Amazon GuardDuty: <a href="https://aws.amazon.com/guardduty/">aws.amazon.com/guardduty/</a></li>
+      <li>Amazon Inspector: <a href="https://aws.amazon.com/inspector/">aws.amazon.com/inspector/</a></li>
+      <li>Amazon Macie: <a href="https://aws.amazon.com/macie/">aws.amazon.com/macie/</a></li>
+      <li>AWS Artifact: <a href="https://aws.amazon.com/artifact/">aws.amazon.com/artifact/</a></li>
+      <li>AWS Certificate Manager: <a href="https://aws.amazon.com/certificate-manager/">aws.amazon.com/certificate-manager/</a></li>
+      <li>AWS CloudHSM: <a href="https://aws.amazon.com/cloudhsm/">aws.amazon.com/cloudhsm/</a></li>
+      <li>AWS Directory Service: <a href="https://aws.amazon.com/directoryservice/">aws.amazon.com/directoryservice/</a></li>
+      <li>AWS Firewall Manager: <a href="https://aws.amazon.com/firewall-manager/">aws.amazon.com/firewall-manager/</a></li>
+      <li>AWS IAM: <a href="https://aws.amazon.com/iam/">aws.amazon.com/iam/</a></li>
+      <li>AWS KMS: <a href="https://aws.amazon.com/kms/">aws.amazon.com/kms/</a></li>
+    </ul>
+  </section>
+
+  <!-- COMPUTE -->
+  <section class="panel" data-tab="compute">
+    <h2 class="panel-title">Compute</h2>
+    <ul>
+      <li>What applications are running on top of your servers?</li>
+      <li>How many corresponding design, development, test, QA, staging, pre-production, disaster recovery environments are you running?</li>
+      <li>What are the operating systems for your server systems?</li>
+      <li>Are you running into any performance issues or management overhead?</li>
+      <li>How many servers do you manage today?</li>
+      <li>How many IT admins are managing the servers? How are they keeping up with growing number of servers?</li>
+      <li>What is the RTO and RPO for the server failures?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>What are the top pain points of running your existing server environment?</li>
+      <li>Do you have a robust disaster recovery plan for your critical servers?</li>
+      <li>Have you considered using cloud for DR?</li>
+      <li>Have you thought of migrating off Windows to Linux alternatives?</li>
+      <li>Would you like to do a migration evaluation for your existing servers to AWS EC2 or serverless?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A20&amp;tab=view_all">Kiku Learning Library — Compute</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon EC2: <a href="https://aws.amazon.com/ec2/">aws.amazon.com/ec2/</a></li>
+      <li>Amazon EC2 Auto Scaling: <a href="https://aws.amazon.com/ec2/autoscaling/">aws.amazon.com/ec2/autoscaling/</a></li>
+      <li>Amazon Elastic Beanstalk: <a href="https://aws.amazon.com/elasticbeanstalk/">aws.amazon.com/elasticbeanstalk/</a></li>
+      <li>Elastic Container Registry: <a href="https://aws.amazon.com/ecr/">aws.amazon.com/ecr/</a></li>
+      <li>Elastic Container Service: <a href="https://aws.amazon.com/containers/services/">aws.amazon.com/containers/services/</a></li>
+      <li>Elastic Kubernetes Service: <a href="https://aws.amazon.com/eks/">aws.amazon.com/eks/</a></li>
+      <li>AWS Fargate: <a href="https://aws.amazon.com/fargate/">aws.amazon.com/fargate/</a></li>
+      <li>AWS Lambda: <a href="https://aws.amazon.com/lambda/">aws.amazon.com/lambda/</a></li>
+      <li>AWS Lightsail: <a href="https://aws.amazon.com/lightsail/">aws.amazon.com/lightsail/</a></li>
+      <li>AWS Outposts: <a href="https://aws.amazon.com/outposts/">aws.amazon.com/outposts/</a></li>
+      <li>AWS Serverless Application Repository: <a href="https://aws.amazon.com/serverless/serverlessrepo/">aws.amazon.com/serverless/serverlessrepo/</a></li>
+      <li>VMware Cloud on AWS: <a href="https://cloud.vmware.com/vmc-aws">cloud.vmware.com/vmc-aws</a></li>
+      <li>AWS Wavelength: <a href="https://aws.amazon.com/wavelength/">aws.amazon.com/wavelength/</a></li>
+      <li>AWS Batch: <a href="https://aws.amazon.com/batch/">aws.amazon.com/batch/</a></li>
+    </ul>
+  </section>
+
+  <!-- ANALYTICS -->
+  <section class="panel" data-tab="analytics">
+    <h2 class="panel-title">Analytics</h2>
+    <ul>
+      <li>What type of data are you working with and where does it come from?</li>
+      <li>Are these data structured, unstructured, or semi-structured?</li>
+      <li>What you will want to do with the data? E.g. store now analyze later, or operational reporting</li>
+      <li>How are you currently capturing and storing your data? What tools and databases are in use?</li>
+      <li>What is your strategy for data management and governance?</li>
+      <li>How complex is your data acquisition process?</li>
+      <li>What is your current ETL process?</li>
+      <li>What type of skills exist in your organization? E.g. DBA, IT engineers, big data engineers</li>
+      <li>How do you currently manage data?</li>
+      <li>How does all this go with your organization's culture?</li>
+      <li>What are your plans to address regulation?</li>
+      <li>What are the top pain points of running your existing data analytics environment?</li>
+      <li>Are there particular areas where you would like to apply analytics or AI/ML technologies (but haven't yet)?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you looking to migrate some or all of your data analytics workload to the cloud?
+        <ul><li>If so, what are your specific requirements and timeline?</li></ul>
+      </li>
+      <li>Do you have partners to help you with the migration?</li>
+      <li>Would you be interested in knowing AWS data lake and analytics offerings?</li>
+      <li>Would you like to do a migration evaluation for your existing data analytics to AWS Redshift or data lake?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul>
+      <li><a href="https://amazonwebservices.mindtickle.com/?_branch_match_id=735651251973410808#/courses/series/1284153514833126012?series=1284153514833126012">Mindtickle LevelUP! Analytics course</a></li>
+      <li><a href="https://amazonwebservices.mindtickle.com/?_branch_match_id=735651251973410808#/courses/series/1239948442897393076?series=1239948442897393076">Mindtickle Analytics Sales Play course</a></li>
+      <li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A107&amp;tab=view_all">Kiku Analytics courses</a></li>
+    </ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon Athena: <a href="https://aws.amazon.com/athena/">aws.amazon.com/athena/</a></li>
+      <li>Amazon ElasticSearch: <a href="https://aws.amazon.com/elasticsearch-service/">aws.amazon.com/elasticsearch-service/</a></li>
+      <li>Amazon EMR: <a href="https://aws.amazon.com/emr/">aws.amazon.com/emr/</a></li>
+      <li>Amazon Kinesis: <a href="https://aws.amazon.com/kinesis/">aws.amazon.com/kinesis/</a></li>
+      <li>Amazon MSK: <a href="https://aws.amazon.com/msk/">aws.amazon.com/msk/</a></li>
+    </ul>
+  </section>
+
+  <!-- BACKUP/DR -->
+  <section class="panel" data-tab="backupdr">
+    <h2 class="panel-title">Backup/DR</h2>
+    <ul>
+      <li>Do you currently have a Disaster Recovery Plan (DRP)?</li>
+      <li>What is the overall RTO and RPO defined?</li>
+      <li>What tools and/or vendors are you using for DR?</li>
+      <li>Can you describe your DR processes in general?</li>
+      <li>How often do you conduct DR test or exercises?</li>
+      <li>Can you tell me your most recent DR experience?
+        <ul>
+          <li>Areas of focus: Policies</li>
+          <li>Procedures</li>
+          <li>Organization</li>
+          <li>RTOs and RPOs (business vs technical)</li>
+          <li>Date of DRP last updated</li>
+          <li>DR exercise frequency and last exercise date</li>
+          <li>Are staff trained on DRP</li>
+          <li>Does everyone understand their roles within the DRP</li>
+          <li>Are there any SLA considerations, if so, what are they?</li>
+          <li>Are there any security considerations, if so, what are they?</li>
+        </ul>
+      </li>
+      <li>What is the backup solution being used in your environment?</li>
+      <li>How much data are you protecting in your environment?</li>
+      <li>Where are you storing the backup data today?</li>
+      <li>Can you describe your backup processes in general?</li>
+      <li>How often do you run backup jobs?</li>
+      <li>What are the main applications and data type you are backing up?</li>
+      <li>Are you sending your backup data offsite or to the cloud?</li>
+      <li>Is your DR based on restoring from backup data?
+        <ul>
+          <li>Areas of focus: Backup architecture</li>
+          <li>Backup policy (source data, frequency, retention etc.)</li>
+          <li>Backup full capacity (breakdown by files, databases, applications, etc.)</li>
+          <li>Backup medium: disk, tape, cloud, offsite?</li>
+          <li>Backup window</li>
+          <li>How often do you test recovery from backup?</li>
+          <li>Are there procedures for recovery from backup?</li>
+          <li>Organization structure</li>
+          <li>Do you offer SLAs to business groups?</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you interested in discussing ways to modernize your backup process without changing your workflow using the AWS cloud?</li>
+      <li>Are you using a backup vendor with a connector that allows backups to be written to S3?</li>
+      <li>Would you be interested in knowing AWS backup and DR automation solutions?</li>
+      <li>Would you like to do a POC using AWS backup and DR services?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul>
+      <li><a href="https://kiku.aws.training/Details/eLearning?id=19597">Introduction to Backup and Restore with AWS</a></li>
+      <li><a href="https://kiku.aws.training/Details/eLearning?id=50309">CloudEndure Disaster Recovery Technical Training</a></li>
+    </ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>AWS Backup: <a href="https://aws.amazon.com/backup/">aws.amazon.com/backup/</a></li>
+      <li>CloudEndure Disaster Recovery: <a href="https://aws.amazon.com/cloudendure-disaster-recovery/">aws.amazon.com/cloudendure-disaster-recovery/</a></li>
+      <li>Amazon S3: <a href="https://aws.amazon.com/s3/">aws.amazon.com/s3/</a></li>
+      <li>Amazon S3 Glacier: <a href="https://aws.amazon.com/glacier/">aws.amazon.com/glacier/</a></li>
+    </ul>
+  </section>
+
+  <!-- DATABASES -->
+  <section class="panel" data-tab="databases">
+    <h2 class="panel-title">Databases</h2>
+    <ul>
+      <li>What database technology is currently supporting your applications?</li>
+      <li>What applications are running on top of your databases? Please name them specifically.</li>
+      <li>How large is this workload(s) in terms of infrastructure requirements? Servers, storage, networking, support staff, etc.</li>
+      <li>How many corresponding design, development, test, QA, staging, pre-production, disaster recovery environments are you running?</li>
+      <li>What middleware software are you running alongside the database systems? E.g. WebLogic, HTTP server or listener, identity management, etc.</li>
+      <li>Are you running into any performance issues or management overhead?</li>
+      <li>How many databases do you run today? Which databases are they and their versions?</li>
+      <li>How many DBAs manage the databases? How are they keeping up with growing number of databases?</li>
+      <li>What is the RTO and RPO for the databases?</li>
+      <li>How long do the database data need to be queried?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>What are the top pain points of running your existing database environment?</li>
+      <li>Do you have a robust disaster recovery plan for your critical databases?</li>
+      <li>Have you considered using cloud for DR?</li>
+      <li>Have you thought of migrating off proprietary databases and option open source alternatives?</li>
+      <li>Would you like to do a migration evaluation for your existing databases to AWS RDS?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul>
+      <li><a href="https://amazonwebservices.mindtickle.com/?_branch_match_id=735651251973410808#/courses/series/1284152790641479288?series=1284152790641479288">Mindtickle Database course</a></li>
+      <li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A71&amp;tab=view_all">Kiku Databases courses</a></li>
+    </ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon RDS: <a href="https://aws.amazon.com/rds/">aws.amazon.com/rds/</a></li>
+      <li>Amazon Aurora: <a href="https://aws.amazon.com/rds/aurora/">aws.amazon.com/rds/aurora/</a></li>
+      <li>Amazon DocumentDB: <a href="https://aws.amazon.com/documentdb/">aws.amazon.com/documentdb/</a></li>
+      <li>Amazon DynamoDB: <a href="https://aws.amazon.com/dynamodb/">aws.amazon.com/dynamodb/</a></li>
+      <li>Amazon ElastiCache: <a href="https://aws.amazon.com/elasticache/">aws.amazon.com/elasticache/</a></li>
+      <li>Amazon Keyspaces: <a href="https://aws.amazon.com/keyspaces/">aws.amazon.com/keyspaces/</a></li>
+      <li>Amazon Neptune: <a href="https://aws.amazon.com/neptune/">aws.amazon.com/neptune/</a></li>
+      <li>Amazon Timestream: <a href="https://aws.amazon.com/timestream/">aws.amazon.com/timestream/</a></li>
+      <li>AWS Database Migration Service: <a href="https://aws.amazon.com/dms/">aws.amazon.com/dms/</a></li>
+      <li>AWS Database Migration Accelerator: <a href="https://aws.amazon.com/solutions/databasemigrations/database-migration-accelerator/">aws.amazon.com/solutions/databasemigrations/database-migration-accelerator/</a></li>
+    </ul>
+  </section>
+
+  <!-- DATA TRANSFER -->
+  <section class="panel" data-tab="datatransfer">
+    <h2 class="panel-title">Data Transfer</h2>
+    <ul>
+      <li>How much data do you plan to transfer to AWS?</li>
+      <li>What is your internet bandwidth?</li>
+      <li>What is the ETA for the transfer?</li>
+      <li>What are the sources of the data transfer?</li>
+      <li>What are the targets of the data transfer? E.g. S3, EFS, FSx, EC2, RDS, etc.</li>
+      <li>Any preference on data transfer protocols? E.g. FTP, SFTP, FTPS, etc.</li>
+      <li>Can you provide a list of your existing file servers and NAS devices and their OS versions and models?</li>
+      <li>Can you provide a list of your existing block storage devices and their models?</li>
+      <li>Can you provide a list of your existing object storage devices and their models?</li>
+      <li>What is your existing backup solution and backup storage in use? Is backup data deduped?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul><li>Any requirement or preferred tools for the data transfer project?</li></ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A31&amp;tab=view_all">AWS Migration and Transfer courses on Kiku</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>AWS DataSync: <a href="https://aws.amazon.com/datasync/">aws.amazon.com/datasync/</a></li>
+      <li>AWS Transfer Family: <a href="https://aws.amazon.com/aws-transfer-family/">aws.amazon.com/aws-transfer-family/</a></li>
+      <li>Amazon S3 Transfer Acceleration: <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html">docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html</a></li>
+      <li>Amazon Snow Family: <a href="https://aws.amazon.com/snow/">aws.amazon.com/snow/</a></li>
+      <li>Amazon Kinesis Data Firehose: <a href="https://aws.amazon.com/kinesis/data-firehose/">aws.amazon.com/kinesis/data-firehose/</a></li>
+    </ul>
+  </section>
+
+  <!-- END USER COMPUTING -->
+  <section class="panel" data-tab="euc">
+    <h2 class="panel-title">End User Computing</h2>
+    <ul>
+      <li>Do you currently have a VDI solution on-prem? What is it?</li>
+      <li>How are you enabling your employees to remotely access the applications they need?</li>
+      <li>How do you plan to give remote workers secure access to your corporate network?</li>
+      <li>What percent of your on-prem footprint is to run VDI solution?</li>
+      <li>How are you supporting your employees to engage with each other using audio and video conferencing at scale?</li>
+      <li>How are you keeping your contact center operational while your staff are all working from home?</li>
+      <li>How long does it take to scale (or on-board) new users?</li>
+      <li>How do you handle data security and user access for your contingent workforce?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you thinking of setting up cloud based virtual workstations for new employees or contractors?</li>
+      <li>Are you thinking of migrating your on-prem VDI infrastructure to the cloud?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A65&amp;tab=view_all">Kiku Desktop &amp; App Streaming courses</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon Workspaces: <a href="https://aws.amazon.com/workspaces/">aws.amazon.com/workspaces/</a></li>
+      <li>Amazon AppStream 2.0: <a href="https://aws.amazon.com/appstream2/">aws.amazon.com/appstream2/</a></li>
+      <li>Amazon WorkLink: <a href="https://aws.amazon.com/worklink/">aws.amazon.com/worklink/</a></li>
+      <li>Amazon WorkDocs: <a href="https://aws.amazon.com/workdocs/">aws.amazon.com/workdocs/</a></li>
+    </ul>
+  </section>
+
+  <!-- CONTENT DELIVERY -->
+  <section class="panel" data-tab="contentdelivery">
+    <h2 class="panel-title">Content Delivery</h2>
+    <ul>
+      <li>What is your current network topology? Including LAN and WAN</li>
+      <li>Do you have any workload running in the cloud?</li>
+      <li>What is your network management system and tool?</li>
+      <li>Can you share any network architecture diagram?</li>
+      <li>How much bandwidth do you have for internet access?</li>
+      <li>How do your branches and remote sites access internet?</li>
+      <li>Do you use on-prem DNS servers or cloud based DNS?</li>
+      <li>What is your RTO for network failure?</li>
+      <li>What is your RTO for network infrastructure recovery in DR?</li>
+      <li>Do you require Layer 2 extension to connect to the cloud platform?</li>
+      <li>What are the top pain points with your existing network environment?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you interested in learning more about AWS networking?</li>
+      <li>Are you interested in a deep dive/immersion day on network and content delivery infrastructure?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <p class="muted">TBD</p>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon VPC: <a href="https://aws.amazon.com/vpc/">aws.amazon.com/vpc/</a></li>
+      <li>Amazon API Gateway: <a href="https://aws.amazon.com/api-gateway/">aws.amazon.com/api-gateway/</a></li>
+      <li>Amazon CloudFront: <a href="https://aws.amazon.com/cloudfront/">aws.amazon.com/cloudfront/</a></li>
+      <li>Amazon Route 53: <a href="https://aws.amazon.com/route53/">aws.amazon.com/route53/</a></li>
+      <li>AWS App Mesh: <a href="https://aws.amazon.com/app-mesh/">aws.amazon.com/app-mesh/</a></li>
+      <li>AWS Cloud Map: <a href="https://aws.amazon.com/cloud-map/">aws.amazon.com/cloud-map/</a></li>
+      <li>AWS Direct Connect: <a href="https://aws.amazon.com/directconnect/">aws.amazon.com/directconnect/</a></li>
+      <li>AWS Global Accelerator: <a href="https://aws.amazon.com/global-accelerator/">aws.amazon.com/global-accelerator/</a></li>
+      <li>AWS PrivateLink: <a href="https://aws.amazon.com/privatelink/">aws.amazon.com/privatelink/</a></li>
+      <li>AWS Transit Gateway: <a href="https://aws.amazon.com/transit-gateway/">aws.amazon.com/transit-gateway/</a></li>
+    </ul>
+  </section>
+
+  <!-- STORAGE -->
+  <section class="panel" data-tab="storage">
+    <h2 class="panel-title">Storage</h2>
+    <ul>
+      <li>What type of storage devices (SAN, NAS, Tape) are deployed?</li>
+      <li>What is the total storage capacity in your existing environment?</li>
+      <li>Do you have object storage device in your environment?</li>
+      <li>Do you have tape storage device in your environment?</li>
+      <li>What types of file sharing protocols are in use? CIFS, NFS, or others</li>
+      <li>Do storage devices have performance bottlenecks?</li>
+      <li>What is the ratio between unstructured and structured data?</li>
+      <li>What is the yearly storage capacity increase rate in the past three years?</li>
+      <li>Is storage space generally sufficient? What is the average space usage?</li>
+      <li>Do you utilize HA or clustering technologies for storage devices?</li>
+      <li>Do you replicate storage data offsite for DR purpose?</li>
+      <li>What are the top pain points with your existing storage environment?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you looking to migrate some or all of your storage to the cloud?</li>
+      <li>Do you have partners to help you with the migration?</li>
+      <li>Would you be interested in knowing AWS storage offerings?</li>
+      <li>Would you like to do a POC using AWS storage offerings?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A29&amp;tab=view_all">Kiku Storage courses</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>AWS Backup: <a href="https://aws.amazon.com/backup/">aws.amazon.com/backup/</a></li>
+      <li>Amazon S3: <a href="https://aws.amazon.com/s3/">aws.amazon.com/s3/</a></li>
+      <li>Amazon S3 Glacier: <a href="https://aws.amazon.com/glacier/">aws.amazon.com/glacier/</a></li>
+      <li>AWS Storage Gateway: <a href="https://aws.amazon.com/storagegateway/">aws.amazon.com/storagegateway/</a></li>
+      <li>Amazon EBS: <a href="https://aws.amazon.com/ebs/">aws.amazon.com/ebs/</a></li>
+      <li>Amazon EFS: <a href="https://aws.amazon.com/efs/">aws.amazon.com/efs/</a></li>
+      <li>Amazon FSx: <a href="https://aws.amazon.com/fsx/">aws.amazon.com/fsx/</a></li>
+      <li>AWS Transfer Family: <a href="https://aws.amazon.com/aws-transfer-family/">aws.amazon.com/aws-transfer-family/</a></li>
+      <li>AWS Snow Family: <a href="https://aws.amazon.com/snow/">aws.amazon.com/snow/</a></li>
+    </ul>
+  </section>
+
+  <!-- ISV -->
+  <section class="panel" data-tab="isv">
+    <h2 class="panel-title">ISV</h2>
+
+    <h3>General</h3>
+    <ul><li>Which of your current software applications are most critical to your operations?</li></ul>
+
+    <h3>Security</h3>
+    <ul><li>What security tools do you currently use to protect your business?</li></ul>
+
+    <h3>Backup/Storage</h3>
+    <ul><li>Do you have a backup/DR plan in place? Which tools do you use?</li></ul>
+
+    <h3>Networking</h3>
+    <ul><li>What services/tools do you currently use for networking?</li></ul>
+
+    <h3>Data and Analytics</h3>
+    <ul><li>What tools do you use today to manage and action your data?</li></ul>
+
+    <h3>Observability</h3>
+    <ul><li>What tools do you currently use for capturing, storing and processing logs, metrics &amp; traces?</li></ul>
+
+    <h3>Business Apps</h3>
+    <ul><li>What other applications are critical for other parts of your organization such as sales, marketing, HR, etc.?</li></ul>
+  </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="block" id="breakout">
+    <div class="block-head">
+      <h2><span class="block-num">04</span> Cloud Internet Breakout</h2>
+      <p class="block-desc">Assessment interview playbook.</p>
+    </div>
+    <div class="content-breakout">
+      <div class="container">
+<div class="howto">
+    <strong>How to use this:</strong> Start from Layer 0 (Foundation) and work your way down. Each layer builds on the previous one. The questions are designed to uncover gaps naturally — the customer's answers at each layer will tell you where to probe deeper. Map every answer back to the workbook tab noted in brackets.
   </div>
+
+  
+
+  <!-- LAYER 0 -->
+  <section class="panel" data-tab="layer0">
+    <h2 class="panel-title">Layer 0 — Foundation &amp; Account Structure</h2>
+    <p class="prompt">"Before we look at any traffic flows, let's understand how your AWS environment is organized."</p>
+    <h3>Opening Questions</h3>
+    <ul>
+      <li>Can you walk us through your AWS account structure? How many accounts are you running, and how are they organized?</li>
+      <li>Are you using AWS Control Tower or AWS Organizations? If so, how are your OUs structured?
+        <ul><li>Do you have separate OUs for Security, Shared Services, Workloads (Prod/Dev/Staging), Sandbox?</li></ul>
+      </li>
+      <li>Is there a dedicated Network/Shared Services account that centralizes your internet breakout?</li>
+      <li>Are you using AWS Landing Zone or Control Tower guardrails? Which guardrails are enabled — detective, preventive, or both?</li>
+      <li>Who manages the root account? Is MFA enforced on root? Is root usage monitored?</li>
+      <li>Do you have Service Control Policies (SCPs) in place? What do they restrict?
+        <ul><li>Example: Do SCPs prevent disabling CloudTrail, leaving certain regions, or creating public S3 buckets?</li></ul>
+      </li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 8 — Compliance &amp; Governance: Account Structure] + [Tab 4 — IAM: SCPs]</div>
+    <div class="why"><strong>Why this matters first:</strong> If the foundation is shaky (no multi-account strategy, no guardrails, no centralized networking account), everything downstream is at risk. This sets the tone.</div>
+  </section>
+
+  <!-- LAYER 1 -->
+  <section class="panel" data-tab="layer1">
+    <h2 class="panel-title">Layer 1 — Network Architecture &amp; Topology</h2>
+    <p class="prompt">"Now let's understand how your network is designed and how traffic flows."</p>
+
+    <h3>VPC Design</h3>
+    <ul>
+      <li>How many VPCs do you have, and what's the segmentation strategy? (by workload, environment, business unit?)</li>
+      <li>What's your CIDR planning approach? Any overlapping ranges? How much room for growth?</li>
+      <li>Are workloads deployed across multiple Availability Zones?</li>
+      <li>Do you have a dedicated Inspection VPC or Egress VPC for centralized internet breakout?</li>
+    </ul>
+
+    <h3>Internet Breakout Path (THE CORE)</h3>
+    <p>Walk me through the exact traffic flow for a workload that needs to reach the internet:</p>
+    <ul>
+      <li>Workload → ? → ? → ? → Internet</li>
+      <li>Is it: Workload → NAT Gateway → AWS Network Firewall → Internet Gateway → Internet?</li>
+      <li>Or is each VPC breaking out independently?</li>
+      <li>Is your breakout model centralized (via Transit Gateway + shared egress VPC) or distributed (per-VPC NAT/IGW)?</li>
+      <li>For inbound traffic: Internet → ? → ? → Workload — what does that path look like?</li>
+    </ul>
+
+    <h3>Transit &amp; Routing</h3>
+    <ul>
+      <li>Are you using AWS Transit Gateway? How are route tables configured?</li>
+      <li>Are there any blackhole routes for security isolation?</li>
+      <li>Is route propagation enabled, or are routes managed statically?</li>
+    </ul>
+
+    <h3>DNS</h3>
+    <ul>
+      <li>Are you using Route 53 for DNS? Private hosted zones?</li>
+      <li>Is Route 53 DNS Firewall enabled to block DNS exfiltration or malicious domains?</li>
+    </ul>
+
+    <h3>Hybrid Connectivity</h3>
+    <ul>
+      <li>Do you have Direct Connect or Site-to-Site VPN back to on-premises?</li>
+      <li>How does on-prem traffic reach the internet — through AWS or through their own breakout?</li>
+    </ul>
+
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 2 — Network Architecture: ALL categories]</div>
+    <div class="why"><strong>Pro tip:</strong> Ask them to share or screen-share their architecture diagram. If they don't have one, that's already a finding.</div>
+  </section>
+
+  <!-- LAYER 2 -->
+  <section class="panel" data-tab="layer2">
+    <h2 class="panel-title">Layer 2 — Security Controls on the Breakout Path</h2>
+    <p class="prompt">"Now that we understand the traffic flow, let's look at what's inspecting and protecting that traffic."</p>
+
+    <h3>Network Firewall</h3>
+    <ul>
+      <li>Are you using AWS Network Firewall? Where is it deployed in the traffic path?</li>
+      <li>Are you using stateful rules, stateless rules, or both? What's the rule order (strict or default)?</li>
+      <li>Is Network Firewall logging enabled? Where do logs go — S3, CloudWatch, or both?</li>
+      <li>Are you inspecting BOTH egress AND ingress traffic through the firewall?</li>
+    </ul>
+
+    <h3>Security Groups &amp; NACLs</h3>
+    <ul>
+      <li>How are Security Groups managed? Is there a standard baseline?</li>
+      <li>Are there any rules allowing 0.0.0.0/0 inbound on SSH (22) or RDP (3389)?</li>
+      <li>Are NACLs used as an additional layer, or just left at default allow-all?</li>
+    </ul>
+
+    <h3>Egress Filtering (Critical for Internet Breakout)</h3>
+    <ul>
+      <li>Is outbound traffic restricted to known-good destinations, or is it open?</li>
+      <li>Do you have domain-based allowlisting for egress? (e.g., only allow *.amazonaws.com, specific SaaS endpoints)</li>
+      <li>How do you prevent data exfiltration via DNS tunneling or HTTPS to unauthorized endpoints?</li>
+    </ul>
+
+    <h3>WAF &amp; DDoS</h3>
+    <ul>
+      <li>Is AWS WAF deployed in front of any public-facing endpoints? Which managed rule groups?</li>
+      <li>Are you on AWS Shield Standard or Advanced?</li>
+    </ul>
+
+    <h3>Encryption in Transit</h3>
+    <ul>
+      <li>Is TLS 1.2+ enforced on all endpoints? How are certificates managed — ACM?</li>
+      <li>Is there end-to-end encryption, or does TLS terminate at the load balancer?</li>
+    </ul>
+
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 3 — Security Controls: ALL categories]</div>
+    <div class="redflag"><strong>Key red flags to listen for:</strong> "We haven't restricted egress yet" / "Security groups are managed per team" / "We don't inspect outbound traffic"</div>
+  </section>
+
+  <!-- LAYER 3 -->
+  <section class="panel" data-tab="layer3">
+    <h2 class="panel-title">Layer 3 — Identity &amp; Access Management</h2>
+    <p class="prompt">"Who has access to modify this network and security infrastructure?"</p>
+    <ul>
+      <li>How do engineers authenticate to AWS? IAM users, IAM Identity Center (SSO), or federated via an IdP?</li>
+      <li>Is MFA enforced for all human access? What type — hardware tokens or virtual?</li>
+      <li>How are IAM policies structured? Do you follow least-privilege? Any policies with *:*?</li>
+      <li>Are there permission boundaries in place for delegated admin roles?</li>
+      <li>How are secrets managed — Secrets Manager, Parameter Store, or (red flag) hardcoded/environment variables?</li>
+      <li>How often are access keys rotated? Are there any long-lived access keys?</li>
+      <li>Who has permission to modify Security Groups, NACLs, route tables, and Network Firewall rules?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 4 — Identity &amp; Access Management]</div>
+  </section>
+
+  <!-- LAYER 4 -->
+  <section class="panel" data-tab="layer4">
+    <h2 class="panel-title">Layer 4 — Data Protection</h2>
+    <p class="prompt">"Let's talk about how data is protected at rest and in transit across this environment."</p>
+    <ul>
+      <li>Is encryption at rest enabled for all storage — EBS, S3, RDS, DynamoDB?</li>
+      <li>Are you using AWS-managed keys or Customer Managed Keys (CMKs) in KMS?</li>
+      <li>Is KMS key rotation enabled? What's the rotation policy?</li>
+      <li>For S3 specifically:
+        <ul>
+          <li>Is S3 Block Public Access enabled at the account level?</li>
+          <li>Is versioning and MFA Delete enabled on critical buckets?</li>
+          <li>Are S3 access logs enabled?</li>
+        </ul>
+      </li>
+      <li>Do you have a data classification strategy? Are you using Amazon Macie?</li>
+      <li>What's your backup strategy? AWS Backup? Cross-region replication? Have you tested recovery?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 5 — Data Protection]</div>
+  </section>
+
+  <!-- LAYER 5 -->
+  <section class="panel" data-tab="layer5">
+    <h2 class="panel-title">Layer 5 — Monitoring, Detection &amp; Visibility</h2>
+    <p class="prompt">"Can you see what's happening in your environment right now?"</p>
+    <ul>
+      <li>Is CloudTrail enabled in ALL regions, including regions you don't use?</li>
+      <li>Is CloudTrail a multi-account, organization-level trail?</li>
+      <li>Is Amazon GuardDuty enabled across all accounts and regions? Who reviews the findings?</li>
+      <li>Is AWS Security Hub enabled? Which standards are turned on — CIS, AWS Foundational, PCI DSS?</li>
+      <li>Are VPC Flow Logs enabled on all VPCs, subnets, and key ENIs?
+        <ul><li>Where do they go? Are you analyzing them (Athena, SIEM)?</li></ul>
+      </li>
+      <li>Is Amazon Inspector running for network reachability and vulnerability assessments?</li>
+      <li>Do you have CloudWatch alarms for security-critical events?
+        <ul><li>Root login, unauthorized API calls, Security Group changes, route table modifications?</li></ul>
+      </li>
+      <li>Are AWS Config rules enabled? Any conformance packs deployed?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 6 — Monitoring &amp; Detection]</div>
+    <div class="redflag"><strong>This layer is where most customers have the biggest gaps</strong> — they have the services but aren't actively reviewing findings.</div>
+  </section>
+
+  <!-- LAYER 6 -->
+  <section class="panel" data-tab="layer6">
+    <h2 class="panel-title">Layer 6 — Incident Response Readiness</h2>
+    <p class="prompt">"If something goes wrong right now — a breach, a misconfiguration, an exfiltration attempt — what happens?"</p>
+    <ul>
+      <li>Do you have a documented incident response plan specific to AWS?</li>
+      <li>Are there runbooks or playbooks for common scenarios?
+        <ul><li>Compromised EC2 instance, leaked credentials, unauthorized S3 access, DDoS attack?</li></ul>
+      </li>
+      <li>Can you isolate a compromised resource quickly? (Security Group isolation, NACL deny, credential revocation)</li>
+      <li>Do you have a forensics capability — isolated VPC, snapshot procedures, evidence chain of custody?</li>
+      <li>What are your RTO/RPO targets? Have you tested disaster recovery?</li>
+      <li>After an incident, is there a lessons-learned / COE process?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 7 — Incident Response]</div>
+  </section>
+
+  <!-- LAYER 7 -->
+  <section class="panel" data-tab="layer7">
+    <h2 class="panel-title">Layer 7 — Compliance &amp; Governance</h2>
+    <p class="prompt">"Finally, let's look at the governance framework around all of this."</p>
+    <ul>
+      <li>Have you run the CIS AWS Foundations Benchmark against your environment? What's the compliance percentage?</li>
+      <li>Have you done an AWS Well-Architected Security Pillar review?</li>
+      <li>Is there a tagging strategy enforced via tag policies? What are the mandatory tags?</li>
+      <li>How do you handle audit and evidence collection — AWS Audit Manager?</li>
+      <li>Are there regular security reviews or assessments scheduled?</li>
+      <li>How do you track remediation of findings — is there a process, or is it ad hoc?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 8 — Compliance &amp; Governance]</div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="panel" data-tab="closing">
+    <h2 class="panel-title">Closing the Conversation</h2>
+    <p>After going through all layers, wrap up with:</p>
+    <ul>
+      <li>"Based on what we've discussed, I'll document our findings in the assessment workbook and score each area."</li>
+      <li>"We'll provide you with a RAG-rated view — Red for critical gaps, Amber for partial implementation, Green for areas that meet best practices."</li>
+      <li>"The deliverable will include specific remediation recommendations with owners and target dates."</li>
+      <li>"Are there any areas we didn't cover that you'd like us to assess?"</li>
+    </ul>
+  </section>
+
+  <!-- QUICK REFERENCE -->
+  <section class="panel" data-tab="quickref">
+    <h2 class="panel-title">Quick Reference — Assessment Flow</h2>
+    <table class="flow-table">
+      <tbody><tr><td>Layer 0: Foundation</td><td>Account Structure, Control Tower, SCPs, Guardrails</td></tr>
+      <tr><td>Layer 1: Network</td><td>VPC Design, Internet Breakout Path, Transit Gateway, DNS</td></tr>
+      <tr><td>Layer 2: Security</td><td>Network Firewall, SGs, NACLs, WAF, Egress Filtering</td></tr>
+      <tr><td>Layer 3: Identity</td><td>IAM, MFA, SSO, Secrets, Least Privilege</td></tr>
+      <tr><td>Layer 4: Data</td><td>Encryption, KMS, S3 Security, Backup</td></tr>
+      <tr><td>Layer 5: Monitoring</td><td>CloudTrail, GuardDuty, Security Hub, Flow Logs, Config</td></tr>
+      <tr><td>Layer 6: Incident Resp</td><td>IR Plan, Runbooks, Forensics, Containment, Recovery</td></tr>
+      <tr><td>Layer 7: Compliance</td><td>CIS Benchmark, Well-Architected, Tagging, Audit</td></tr>
+    </tbody></table>
+  </section>
+      </div>
+    </div>
+  </section>
+
 </div>
 
-<script src="js/main.js"></script>
+<footer class="site-footer">Compiled assessment call toolkit &mdash; all sections shown in full, in order.</footer>
+
 </body>
 </html>
