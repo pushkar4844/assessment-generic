@@ -75,9 +75,39 @@ header.site-header p { margin: 8px 0 0; color: #bbb; font-size: 0.92rem; }
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: 14px;
-  padding: 18px 20px;
-  margin-bottom: 18px;
+  padding: 18px 52px 18px 20px;
+  margin-bottom: 0;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  transition: border-color 0.15s ease;
 }
+
+.block-head::-webkit-details-marker { display: none; }
+
+.block-head::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 22px;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid var(--page-muted);
+  border-bottom: 2px solid var(--page-muted);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform 0.15s ease;
+}
+
+.block[open] > .block-head::after {
+  transform: translateY(-30%) rotate(-135deg);
+}
+
+.block-head:hover,
+.block[open] > .block-head {
+  border-color: var(--accent);
+}
+
+.block > div[class^="content-"] { margin-top: 12px; }
 
 .block-head h2 {
   margin: 0 0 4px;
