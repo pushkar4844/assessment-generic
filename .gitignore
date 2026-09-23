@@ -1,0 +1,10 @@
+# Raw browser-saved exports (source material only, not part of the site)
+*_files/
+AWS cloud internet breakout.html
+AWS services reference in HTML - Claude.html
+intro-to-drive.html
+Speaking notes.html
+
+# OS / editor junk
+.DS_Store
+Thumbs.db

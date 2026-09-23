@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AWS Cloud Internet Breakout — Assessment Interview Playbook</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #555;
+    --accent: #FF9900;
+    --header-bg: #111;
+    --header-fg: #eee;
+    --tab-bg: #f4f4f4;
+    --tab-active-bg: #232f3e;
+    --tab-active-fg: #fff;
+    --border: #ddd;
+    --link: #0066cc;
+    --callout-bg: #fff7e6;
+    --redflag-bg: #fdecec;
+    --redflag-border: #d9534f;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181f;
+      --fg: #e8e8e8;
+      --muted: #a0a0a0;
+      --tab-bg: #1f2530;
+      --border: #333;
+      --link: #6fb3ff;
+      --callout-bg: #2a2410;
+      --redflag-bg: #2a1616;
+      --redflag-border: #d9534f;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181f;
+    --fg: #e8e8e8;
+    --muted: #a0a0a0;
+    --tab-bg: #1f2530;
+    --border: #333;
+    --link: #6fb3ff;
+    --callout-bg: #2a2410;
+    --redflag-bg: #2a1616;
+    --redflag-border: #d9534f;
+  }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  header {
+    background: var(--header-bg);
+    color: var(--header-fg);
+    padding: 20px 16px calc(20px + env(safe-area-inset-top, 0px));
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+  }
+  header h1 { margin: 0; font-size: 1.5rem; }
+  header p { margin: 6px 0 0; color: #bbb; font-size: 0.9rem; }
+  .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+  .howto {
+    background: var(--callout-bg);
+    border-left: 4px solid var(--accent);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+    font-size: 0.95rem;
+  }
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    background: var(--bg);
+    padding: 10px 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    background: var(--tab-bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+  }
+  .tab-btn.active {
+    background: var(--tab-active-bg);
+    color: var(--tab-active-fg);
+    border-color: var(--tab-active-bg);
+  }
+  section.panel {
+    display: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  section.panel.active { display: block; }
+  h2.panel-title {
+    margin-top: 0;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    font-size: 1.15rem;
+  }
+  .prompt {
+    font-style: italic;
+    color: var(--muted);
+    margin: 4px 0 14px;
+  }
+  h3 { font-size: 1rem; margin: 18px 0 6px; }
+  ul { margin: 4px 0 12px; padding-left: 22px; }
+  ul ul { margin-top: 4px; }
+  li { margin-bottom: 6px; }
+  .mapping {
+    background: var(--tab-bg);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 14px 0;
+    font-size: 0.9rem;
+  }
+  .why {
+    font-size: 0.9rem;
+    margin: 10px 0;
+  }
+  .redflag {
+    background: var(--redflag-bg);
+    border-left: 4px solid var(--redflag-border);
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 0.9rem;
+  }
+  .flow-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    margin-top: 10px;
+  }
+  .flow-table td {
+    border: 1px solid var(--border);
+    padding: 6px 10px;
+    vertical-align: top;
+  }
+  .flow-table td:first-child {
+    font-weight: bold;
+    white-space: nowrap;
+    width: 160px;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AWS Cloud Internet Breakout</h1>
+  <p>Assessment Interview Playbook — Layer-by-Layer Discovery Guide</p>
+</header>
+
+<div class="container">
+  <div class="howto">
+    <strong>How to use this:</strong> Start from Layer 0 (Foundation) and work your way down. Each layer builds on the previous one. The questions are designed to uncover gaps naturally — the customer's answers at each layer will tell you where to probe deeper. Map every answer back to the workbook tab noted in brackets.
+  </div>
+
+  <div class="tabs" id="tabs"><button class="tab-btn active" data-tab="layer0">Layer 0: Foundation</button><button class="tab-btn" data-tab="layer1">Layer 1: Network</button><button class="tab-btn" data-tab="layer2">Layer 2: Security</button><button class="tab-btn" data-tab="layer3">Layer 3: Identity</button><button class="tab-btn" data-tab="layer4">Layer 4: Data</button><button class="tab-btn" data-tab="layer5">Layer 5: Monitoring</button><button class="tab-btn" data-tab="layer6">Layer 6: Incident Resp</button><button class="tab-btn" data-tab="layer7">Layer 7: Compliance</button><button class="tab-btn" data-tab="closing">Closing</button><button class="tab-btn" data-tab="quickref">Quick Reference</button></div>
+
+  <!-- LAYER 0 -->
+  <section class="panel active" data-tab="layer0">
+    <h2 class="panel-title">Layer 0 — Foundation &amp; Account Structure</h2>
+    <p class="prompt">"Before we look at any traffic flows, let's understand how your AWS environment is organized."</p>
+    <h3>Opening Questions</h3>
+    <ul>
+      <li>Can you walk us through your AWS account structure? How many accounts are you running, and how are they organized?</li>
+      <li>Are you using AWS Control Tower or AWS Organizations? If so, how are your OUs structured?
+        <ul><li>Do you have separate OUs for Security, Shared Services, Workloads (Prod/Dev/Staging), Sandbox?</li></ul>
+      </li>
+      <li>Is there a dedicated Network/Shared Services account that centralizes your internet breakout?</li>
+      <li>Are you using AWS Landing Zone or Control Tower guardrails? Which guardrails are enabled — detective, preventive, or both?</li>
+      <li>Who manages the root account? Is MFA enforced on root? Is root usage monitored?</li>
+      <li>Do you have Service Control Policies (SCPs) in place? What do they restrict?
+        <ul><li>Example: Do SCPs prevent disabling CloudTrail, leaving certain regions, or creating public S3 buckets?</li></ul>
+      </li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 8 — Compliance &amp; Governance: Account Structure] + [Tab 4 — IAM: SCPs]</div>
+    <div class="why"><strong>Why this matters first:</strong> If the foundation is shaky (no multi-account strategy, no guardrails, no centralized networking account), everything downstream is at risk. This sets the tone.</div>
+  </section>
+
+  <!-- LAYER 1 -->
+  <section class="panel" data-tab="layer1">
+    <h2 class="panel-title">Layer 1 — Network Architecture &amp; Topology</h2>
+    <p class="prompt">"Now let's understand how your network is designed and how traffic flows."</p>
+
+    <h3>VPC Design</h3>
+    <ul>
+      <li>How many VPCs do you have, and what's the segmentation strategy? (by workload, environment, business unit?)</li>
+      <li>What's your CIDR planning approach? Any overlapping ranges? How much room for growth?</li>
+      <li>Are workloads deployed across multiple Availability Zones?</li>
+      <li>Do you have a dedicated Inspection VPC or Egress VPC for centralized internet breakout?</li>
+    </ul>
+
+    <h3>Internet Breakout Path (THE CORE)</h3>
+    <p>Walk me through the exact traffic flow for a workload that needs to reach the internet:</p>
+    <ul>
+      <li>Workload → ? → ? → ? → Internet</li>
+      <li>Is it: Workload → NAT Gateway → AWS Network Firewall → Internet Gateway → Internet?</li>
+      <li>Or is each VPC breaking out independently?</li>
+      <li>Is your breakout model centralized (via Transit Gateway + shared egress VPC) or distributed (per-VPC NAT/IGW)?</li>
+      <li>For inbound traffic: Internet → ? → ? → Workload — what does that path look like?</li>
+    </ul>
+
+    <h3>Transit &amp; Routing</h3>
+    <ul>
+      <li>Are you using AWS Transit Gateway? How are route tables configured?</li>
+      <li>Are there any blackhole routes for security isolation?</li>
+      <li>Is route propagation enabled, or are routes managed statically?</li>
+    </ul>
+
+    <h3>DNS</h3>
+    <ul>
+      <li>Are you using Route 53 for DNS? Private hosted zones?</li>
+      <li>Is Route 53 DNS Firewall enabled to block DNS exfiltration or malicious domains?</li>
+    </ul>
+
+    <h3>Hybrid Connectivity</h3>
+    <ul>
+      <li>Do you have Direct Connect or Site-to-Site VPN back to on-premises?</li>
+      <li>How does on-prem traffic reach the internet — through AWS or through their own breakout?</li>
+    </ul>
+
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 2 — Network Architecture: ALL categories]</div>
+    <div class="why"><strong>Pro tip:</strong> Ask them to share or screen-share their architecture diagram. If they don't have one, that's already a finding.</div>
+  </section>
+
+  <!-- LAYER 2 -->
+  <section class="panel" data-tab="layer2">
+    <h2 class="panel-title">Layer 2 — Security Controls on the Breakout Path</h2>
+    <p class="prompt">"Now that we understand the traffic flow, let's look at what's inspecting and protecting that traffic."</p>
+
+    <h3>Network Firewall</h3>
+    <ul>
+      <li>Are you using AWS Network Firewall? Where is it deployed in the traffic path?</li>
+      <li>Are you using stateful rules, stateless rules, or both? What's the rule order (strict or default)?</li>
+      <li>Is Network Firewall logging enabled? Where do logs go — S3, CloudWatch, or both?</li>
+      <li>Are you inspecting BOTH egress AND ingress traffic through the firewall?</li>
+    </ul>
+
+    <h3>Security Groups &amp; NACLs</h3>
+    <ul>
+      <li>How are Security Groups managed? Is there a standard baseline?</li>
+      <li>Are there any rules allowing 0.0.0.0/0 inbound on SSH (22) or RDP (3389)?</li>
+      <li>Are NACLs used as an additional layer, or just left at default allow-all?</li>
+    </ul>
+
+    <h3>Egress Filtering (Critical for Internet Breakout)</h3>
+    <ul>
+      <li>Is outbound traffic restricted to known-good destinations, or is it open?</li>
+      <li>Do you have domain-based allowlisting for egress? (e.g., only allow *.amazonaws.com, specific SaaS endpoints)</li>
+      <li>How do you prevent data exfiltration via DNS tunneling or HTTPS to unauthorized endpoints?</li>
+    </ul>
+
+    <h3>WAF &amp; DDoS</h3>
+    <ul>
+      <li>Is AWS WAF deployed in front of any public-facing endpoints? Which managed rule groups?</li>
+      <li>Are you on AWS Shield Standard or Advanced?</li>
+    </ul>
+
+    <h3>Encryption in Transit</h3>
+    <ul>
+      <li>Is TLS 1.2+ enforced on all endpoints? How are certificates managed — ACM?</li>
+      <li>Is there end-to-end encryption, or does TLS terminate at the load balancer?</li>
+    </ul>
+
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 3 — Security Controls: ALL categories]</div>
+    <div class="redflag"><strong>Key red flags to listen for:</strong> "We haven't restricted egress yet" / "Security groups are managed per team" / "We don't inspect outbound traffic"</div>
+  </section>
+
+  <!-- LAYER 3 -->
+  <section class="panel" data-tab="layer3">
+    <h2 class="panel-title">Layer 3 — Identity &amp; Access Management</h2>
+    <p class="prompt">"Who has access to modify this network and security infrastructure?"</p>
+    <ul>
+      <li>How do engineers authenticate to AWS? IAM users, IAM Identity Center (SSO), or federated via an IdP?</li>
+      <li>Is MFA enforced for all human access? What type — hardware tokens or virtual?</li>
+      <li>How are IAM policies structured? Do you follow least-privilege? Any policies with *:*?</li>
+      <li>Are there permission boundaries in place for delegated admin roles?</li>
+      <li>How are secrets managed — Secrets Manager, Parameter Store, or (red flag) hardcoded/environment variables?</li>
+      <li>How often are access keys rotated? Are there any long-lived access keys?</li>
+      <li>Who has permission to modify Security Groups, NACLs, route tables, and Network Firewall rules?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 4 — Identity &amp; Access Management]</div>
+  </section>
+
+  <!-- LAYER 4 -->
+  <section class="panel" data-tab="layer4">
+    <h2 class="panel-title">Layer 4 — Data Protection</h2>
+    <p class="prompt">"Let's talk about how data is protected at rest and in transit across this environment."</p>
+    <ul>
+      <li>Is encryption at rest enabled for all storage — EBS, S3, RDS, DynamoDB?</li>
+      <li>Are you using AWS-managed keys or Customer Managed Keys (CMKs) in KMS?</li>
+      <li>Is KMS key rotation enabled? What's the rotation policy?</li>
+      <li>For S3 specifically:
+        <ul>
+          <li>Is S3 Block Public Access enabled at the account level?</li>
+          <li>Is versioning and MFA Delete enabled on critical buckets?</li>
+          <li>Are S3 access logs enabled?</li>
+        </ul>
+      </li>
+      <li>Do you have a data classification strategy? Are you using Amazon Macie?</li>
+      <li>What's your backup strategy? AWS Backup? Cross-region replication? Have you tested recovery?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 5 — Data Protection]</div>
+  </section>
+
+  <!-- LAYER 5 -->
+  <section class="panel" data-tab="layer5">
+    <h2 class="panel-title">Layer 5 — Monitoring, Detection &amp; Visibility</h2>
+    <p class="prompt">"Can you see what's happening in your environment right now?"</p>
+    <ul>
+      <li>Is CloudTrail enabled in ALL regions, including regions you don't use?</li>
+      <li>Is CloudTrail a multi-account, organization-level trail?</li>
+      <li>Is Amazon GuardDuty enabled across all accounts and regions? Who reviews the findings?</li>
+      <li>Is AWS Security Hub enabled? Which standards are turned on — CIS, AWS Foundational, PCI DSS?</li>
+      <li>Are VPC Flow Logs enabled on all VPCs, subnets, and key ENIs?
+        <ul><li>Where do they go? Are you analyzing them (Athena, SIEM)?</li></ul>
+      </li>
+      <li>Is Amazon Inspector running for network reachability and vulnerability assessments?</li>
+      <li>Do you have CloudWatch alarms for security-critical events?
+        <ul><li>Root login, unauthorized API calls, Security Group changes, route table modifications?</li></ul>
+      </li>
+      <li>Are AWS Config rules enabled? Any conformance packs deployed?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 6 — Monitoring &amp; Detection]</div>
+    <div class="redflag"><strong>This layer is where most customers have the biggest gaps</strong> — they have the services but aren't actively reviewing findings.</div>
+  </section>
+
+  <!-- LAYER 6 -->
+  <section class="panel" data-tab="layer6">
+    <h2 class="panel-title">Layer 6 — Incident Response Readiness</h2>
+    <p class="prompt">"If something goes wrong right now — a breach, a misconfiguration, an exfiltration attempt — what happens?"</p>
+    <ul>
+      <li>Do you have a documented incident response plan specific to AWS?</li>
+      <li>Are there runbooks or playbooks for common scenarios?
+        <ul><li>Compromised EC2 instance, leaked credentials, unauthorized S3 access, DDoS attack?</li></ul>
+      </li>
+      <li>Can you isolate a compromised resource quickly? (Security Group isolation, NACL deny, credential revocation)</li>
+      <li>Do you have a forensics capability — isolated VPC, snapshot procedures, evidence chain of custody?</li>
+      <li>What are your RTO/RPO targets? Have you tested disaster recovery?</li>
+      <li>After an incident, is there a lessons-learned / COE process?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 7 — Incident Response]</div>
+  </section>
+
+  <!-- LAYER 7 -->
+  <section class="panel" data-tab="layer7">
+    <h2 class="panel-title">Layer 7 — Compliance &amp; Governance</h2>
+    <p class="prompt">"Finally, let's look at the governance framework around all of this."</p>
+    <ul>
+      <li>Have you run the CIS AWS Foundations Benchmark against your environment? What's the compliance percentage?</li>
+      <li>Have you done an AWS Well-Architected Security Pillar review?</li>
+      <li>Is there a tagging strategy enforced via tag policies? What are the mandatory tags?</li>
+      <li>How do you handle audit and evidence collection — AWS Audit Manager?</li>
+      <li>Are there regular security reviews or assessments scheduled?</li>
+      <li>How do you track remediation of findings — is there a process, or is it ad hoc?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 8 — Compliance &amp; Governance]</div>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="panel" data-tab="closing">
+    <h2 class="panel-title">Closing the Conversation</h2>
+    <p>After going through all layers, wrap up with:</p>
+    <ul>
+      <li>"Based on what we've discussed, I'll document our findings in the assessment workbook and score each area."</li>
+      <li>"We'll provide you with a RAG-rated view — Red for critical gaps, Amber for partial implementation, Green for areas that meet best practices."</li>
+      <li>"The deliverable will include specific remediation recommendations with owners and target dates."</li>
+      <li>"Are there any areas we didn't cover that you'd like us to assess?"</li>
+    </ul>
+  </section>
+
+  <!-- QUICK REFERENCE -->
+  <section class="panel" data-tab="quickref">
+    <h2 class="panel-title">Quick Reference — Assessment Flow</h2>
+    <table class="flow-table">
+      <tbody><tr><td>Layer 0: Foundation</td><td>Account Structure, Control Tower, SCPs, Guardrails</td></tr>
+      <tr><td>Layer 1: Network</td><td>VPC Design, Internet Breakout Path, Transit Gateway, DNS</td></tr>
+      <tr><td>Layer 2: Security</td><td>Network Firewall, SGs, NACLs, WAF, Egress Filtering</td></tr>
+      <tr><td>Layer 3: Identity</td><td>IAM, MFA, SSO, Secrets, Least Privilege</td></tr>
+      <tr><td>Layer 4: Data</td><td>Encryption, KMS, S3 Security, Backup</td></tr>
+      <tr><td>Layer 5: Monitoring</td><td>CloudTrail, GuardDuty, Security Hub, Flow Logs, Config</td></tr>
+      <tr><td>Layer 6: Incident Resp</td><td>IR Plan, Runbooks, Forensics, Containment, Recovery</td></tr>
+      <tr><td>Layer 7: Compliance</td><td>CIS Benchmark, Well-Architected, Tagging, Audit</td></tr>
+    </tbody></table>
+  </section>
+
+</div>
+
+<footer>Compiled from AWS Cloud Internet Breakout — Assessment Interview Playbook</footer>
+
+<script>
+  const tabs = [
+    ["layer0", "Layer 0: Foundation"],
+    ["layer1", "Layer 1: Network"],
+    ["layer2", "Layer 2: Security"],
+    ["layer3", "Layer 3: Identity"],
+    ["layer4", "Layer 4: Data"],
+    ["layer5", "Layer 5: Monitoring"],
+    ["layer6", "Layer 6: Incident Resp"],
+    ["layer7", "Layer 7: Compliance"],
+    ["closing", "Closing"],
+    ["quickref", "Quick Reference"]
+  ];
+  const tabBar = document.getElementById("tabs");
+  tabs.forEach(([id, label], i) => {
+    const btn = document.createElement("button");
+    btn.className = "tab-btn" + (i === 0 ? " active" : "");
+    btn.textContent = label;
+    btn.onclick = () => selectTab(id);
+    btn.dataset.tab = id;
+    tabBar.appendChild(btn);
+  });
+  function selectTab(id) {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === id));
+    document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.dataset.tab === id));
+  }
+  selectTab("layer0");
+</script>
+
+
+
+</body></html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Assessment Call Toolkit</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <h1>Assessment Call Toolkit</h1>
+  <p>AWS Cloud Internet Breakout &mdash; click a box to open its contents</p>
+</header>
+
+<div class="wrap">
+  <div class="grid" id="grid">
+    <button class="box" data-key="intro" type="button">
+      <span class="box-num">01</span>
+      <span class="box-title">Opening Introduction</span>
+      <span class="box-desc">How to open the call and set the tone.</span>
+      <span class="box-arrow" aria-hidden="true">&#8594;</span>
+    </button>
+    <button class="box" data-key="notes" type="button">
+      <span class="box-num">02</span>
+      <span class="box-title">Speaking Notes</span>
+      <span class="box-desc">Full talk track for the call opening.</span>
+      <span class="box-arrow" aria-hidden="true">&#8594;</span>
+    </button>
+    <button class="box" data-key="aws-services" type="button">
+      <span class="box-num">03</span>
+      <span class="box-title">AWS Services Reference</span>
+      <span class="box-desc">Field SA guide: discovery questions.</span>
+      <span class="box-arrow" aria-hidden="true">&#8594;</span>
+    </button>
+    <button class="box" data-key="breakout" type="button">
+      <span class="box-num">04</span>
+      <span class="box-title">Cloud Internet Breakout</span>
+      <span class="box-desc">Assessment interview playbook.</span>
+      <span class="box-arrow" aria-hidden="true">&#8594;</span>
+    </button>
+  </div>
+</div>
+
+<footer>Click any box to view the full content. Press Esc or click outside to close.</footer>
+
+<div class="overlay" id="overlay" hidden>
+  <div class="panel">
+    <div class="panel-bar">
+      <h2 id="panel-title">&nbsp;</h2>
+      <button class="close-btn" id="closeBtn" type="button">Close &#10005;</button>
+    </div>
+    <iframe id="contentFrame" title="Content"></iframe>
+  </div>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

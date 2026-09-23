@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Speaking Notes — Opening the Assessment Call</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #555;
+    --accent: #FF9900;
+    --header-bg: #111;
+    --header-fg: #eee;
+    --tab-bg: #f4f4f4;
+    --tab-active-bg: #232f3e;
+    --tab-active-fg: #fff;
+    --border: #ddd;
+    --quote-bg: #f0f6fb;
+    --quote-border: #3b7fc4;
+    --drop-bg: #fff7e6;
+    --drop-border: #FF9900;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181f;
+      --fg: #e8e8e8;
+      --muted: #a0a0a0;
+      --tab-bg: #1f2530;
+      --border: #333;
+      --quote-bg: #16232e;
+      --quote-border: #3b7fc4;
+      --drop-bg: #2a2410;
+      --drop-border: #FF9900;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181f;
+    --fg: #e8e8e8;
+    --muted: #a0a0a0;
+    --tab-bg: #1f2530;
+    --border: #333;
+    --quote-bg: #16232e;
+    --quote-border: #3b7fc4;
+    --drop-bg: #2a2410;
+    --drop-border: #FF9900;
+  }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+  }
+  header {
+    background: var(--header-bg);
+    color: var(--header-fg);
+    padding: 20px 16px calc(20px + env(safe-area-inset-top, 0px));
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+  }
+  header h1 { margin: 0; font-size: 1.4rem; }
+  header p { margin: 6px 0 0; color: #bbb; font-size: 0.9rem; }
+  .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    background: var(--bg);
+    padding: 10px 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    background: var(--tab-bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    cursor: pointer;
+  }
+  .tab-btn.active {
+    background: var(--tab-active-bg);
+    color: var(--tab-active-fg);
+    border-color: var(--tab-active-bg);
+  }
+  section.panel {
+    display: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  section.panel.active { display: block; }
+  h2.panel-title {
+    margin-top: 0;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    font-size: 1.15rem;
+  }
+  h3 { font-size: 1rem; margin: 18px 0 6px; color: var(--fg); }
+  blockquote {
+    background: var(--quote-bg);
+    border-left: 4px solid var(--quote-border);
+    margin: 10px 0;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-style: italic;
+  }
+  .drop {
+    background: var(--drop-bg);
+    border-left: 4px solid var(--drop-border);
+    margin: 10px 0;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-size: 0.92rem;
+  }
+  .drop strong { color: var(--drop-border); }
+  ul { margin: 4px 0 12px; padding-left: 22px; }
+  li { margin-bottom: 6px; }
+  .phase { margin-bottom: 14px; }
+  .phase strong { display: block; margin-bottom: 4px; }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Speaking Notes</h1>
+  <p>Opening the Assessment Call — AWS Cloud Internet Breakout Assessment</p>
+</header>
+
+<div class="container">
+  <div class="tabs" id="tabs"><button class="tab-btn" data-tab="s1">1. Set the Stage</button><button class="tab-btn active" data-tab="s2">2. Frameworks</button><button class="tab-btn" data-tab="s3">3. Deliverables</button><button class="tab-btn" data-tab="s4">4. Process</button><button class="tab-btn" data-tab="s5">5. What We Need</button><button class="tab-btn" data-tab="s6">6. Trust Builders</button><button class="tab-btn" data-tab="s7">7. Cheat Sheet</button></div>
+
+  <!-- 1. SET THE STAGE -->
+  <section class="panel" data-tab="s1">
+    <h2 class="panel-title">1. Set the Stage — Why We're Here</h2>
+    <blockquote>"Thank you for making time today. The purpose of this engagement is to perform an independent technical assessment of your AWS Cloud Internet Breakout environment — your network architecture, security controls, and operational readiness. Our goal is to give you a clear picture of where you stand today, where the gaps are, and a prioritized roadmap to close them."</blockquote>
+    <blockquote>"This isn't an audit. This is a partnership. We want to help you build confidence that your cloud environment is secure, resilient, and aligned with industry best practices."</blockquote>
+  </section>
+
+  <!-- 2. FRAMEWORKS -->
+  <section class="panel active" data-tab="s2">
+    <h2 class="panel-title">2. Frameworks We're Using — Build Trust</h2>
+
+    <h3>AWS Cloud Adoption Framework (CAF) — Security Perspective</h3>
+    <blockquote>"Our assessment is grounded in the AWS Cloud Adoption Framework, specifically the Security Perspective. This is the same framework AWS uses with thousands of enterprise customers globally. It organizes security into 9 capabilities — from identity management to incident response — and gives us a structured way to measure your maturity."</blockquote>
+    <div class="drop"><strong>Drop this:</strong> "The CAF Security Perspective covers Security Governance, Security Assurance, Identity &amp; Access Management, Threat Detection, Vulnerability Management, Infrastructure Protection, Data Protection, Application Security, and Incident Response."</div>
+
+    <h3>AWS Well-Architected Framework — Security Pillar</h3>
+    <blockquote>"We'll also be leveraging the AWS Well-Architected Framework, specifically the Security Pillar. This is AWS's own lens for evaluating workload-level architecture decisions. It covers 5 focus areas — Identity &amp; Access Management, Detection, Infrastructure Protection, Data Protection, and Incident Response. Think of CAF as the organizational view and Well-Architected as the workload view — we're covering both."</blockquote>
+    <div class="drop"><strong>Drop this:</strong> "The Well-Architected Tool is available free in the AWS Console. After our assessment, you can run ongoing reviews yourself."</div>
+
+    <h3>AWS Security Reference Architecture (SRA)</h3>
+    <blockquote>"For your network and internet breakout design specifically, we're benchmarking against the AWS Security Reference Architecture. This is AWS's prescriptive multi-account architecture that defines how inbound, outbound, and inspection VPCs should be structured — with centralized Network Firewall, Transit Gateway routing, and dedicated security tooling accounts. This is the gold standard for how internet breakout should look."</blockquote>
+    <div class="drop"><strong>Drop this:</strong> "The SRA recommends a dedicated Network account with three VPCs — Inbound, Outbound, and Inspection — with AWS Network Firewall in the inspection VPC handling all traffic."</div>
+
+    <h3>CIS AWS Foundations Benchmark v5.0.0</h3>
+    <blockquote>"For compliance and configuration hardening, we're using the CIS AWS Foundations Benchmark version 5.0.0 — the latest version. This is an industry-accepted standard with clear, step-by-step controls. AWS Security Hub natively supports this benchmark, so after our assessment, you can enable automated compliance monitoring against these controls."</blockquote>
+    <div class="drop"><strong>Drop this:</strong> "CIS v5.0.0 covers 39 automated controls across IAM, logging, monitoring, networking, and storage. Security Hub can continuously evaluate your environment against these."</div>
+
+    <h3>NIST Cybersecurity Framework (CSF)</h3>
+    <blockquote>"Where applicable, we'll also map findings to the NIST Cybersecurity Framework — Identify, Protect, Detect, Respond, Recover. Many of our customers need this mapping for regulatory or board-level reporting. It gives your leadership a common language to understand security posture."</blockquote>
+
+    <h3>ProServe Security Assessment Methodology</h3>
+    <blockquote>"Our assessment methodology follows the same approach used by AWS Professional Services across hundreds of enterprise engagements. We assess across 5 Core Epics aligned to the CAF Security Perspective — Identity &amp; Access Management, Infrastructure Security, Data Protection, Detective Controls, and Incident Response. Each area is scored on a 1-5 maturity scale, giving you a quantifiable baseline."</blockquote>
+  </section>
+
+  <!-- 3. WHAT WE'LL DELIVER -->
+  <section class="panel" data-tab="s3">
+    <h2 class="panel-title">3. What We'll Deliver — Set Expectations</h2>
+    <blockquote>"By the end of this engagement, you'll receive:"</blockquote>
+    <ul>
+      <li>A comprehensive assessment workbook with every control scored 1-5 and RAG-rated (Red/Amber/Green)</li>
+      <li>A findings tracker with severity, business impact, and remediation recommendations</li>
+      <li>An executive dashboard summarizing your security posture across all domains</li>
+      <li>A prioritized remediation roadmap with owners and target timelines</li>
+      <li>Mapping to CIS, NIST, and Well-Architected best practices</li>
+    </ul>
+    <blockquote>"This gives your team a clear, actionable plan — not just a list of problems."</blockquote>
+  </section>
+
+  <!-- 4. HOW WE'LL WORK -->
+  <section class="panel" data-tab="s4">
+    <h2 class="panel-title">4. How We'll Work — The Process</h2>
+    <blockquote>"Our approach has three phases:"</blockquote>
+    <div class="phase">
+      <strong>Phase 1 — Discovery</strong>
+      We'll conduct structured interviews with your network, security, identity, and operations teams. We'll walk through your architecture, review configurations, and understand your current tooling.
+    </div>
+    <div class="phase">
+      <strong>Phase 2 — Analysis</strong>
+      We'll analyze what we've gathered, score each area against the frameworks, identify gaps, and develop recommendations. Where possible, we'll use tools like Prowler, AWS Config, and Security Hub to validate findings.
+    </div>
+    <div class="phase">
+      <strong>Phase 3 — Readout &amp; Roadmap</strong>
+      We'll present findings to your team, walk through the prioritized recommendations, and align on next steps. This isn't a hand-off — we'll iterate with you.
+    </div>
+  </section>
+
+  <!-- 5. WHAT WE NEED -->
+  <section class="panel" data-tab="s5">
+    <h2 class="panel-title">5. What We Need From You — Ask</h2>
+    <blockquote>"To make this successful, we'll need:"</blockquote>
+    <ul>
+      <li>Access to your architecture diagrams (or we'll help you build them)</li>
+      <li>Time with your network, security, and identity teams (2-3 hours per domain)</li>
+      <li>Read-only access to your AWS environment for validation (Config, Security Hub, CloudTrail)</li>
+      <li>A point of contact to coordinate scheduling</li>
+    </ul>
+    <blockquote>"We respect your time. We'll come prepared with specific questions for each session so we're efficient."</blockquote>
+  </section>
+
+  <!-- 6. TRUST BUILDERS -->
+  <section class="panel" data-tab="s6">
+    <h2 class="panel-title">6. Trust Builders — Drop These Naturally</h2>
+
+    <h3>On shared responsibility</h3>
+    <blockquote>"AWS secures the cloud infrastructure — the physical data centers, the hypervisor, the global network. Your responsibility is securing what you put IN the cloud — your configurations, your data, your access controls. Our job is to help you nail that 'in the cloud' piece."</blockquote>
+
+    <h3>On why this matters now</h3>
+    <blockquote>"The internet breakout path is the most critical attack surface in any cloud environment. It's where your workloads touch the public internet. Getting this right — centralized inspection, egress filtering, DDoS protection — is foundational to everything else."</blockquote>
+
+    <h3>On our approach</h3>
+    <blockquote>"We're not here to find fault. We're here to find opportunity. Every organization has gaps — what matters is knowing where they are and having a plan to close them."</blockquote>
+
+    <h3>On benchmarking</h3>
+    <blockquote>"We'll show you not just where you are, but where you should be. Our scoring is based on what we see across hundreds of AWS customers in similar industries and at similar scale."</blockquote>
+  </section>
+
+  <!-- 7. QUICK REFERENCE -->
+  <section class="panel" data-tab="s7">
+    <h2 class="panel-title">7. Framework Quick Reference — Cheat Sheet</h2>
+    <ul>
+      <li><strong>AWS CAF Security Perspective</strong> — 9 capabilities, organizational-level security maturity</li>
+      <li><strong>AWS Well-Architected Security Pillar</strong> — 5 focus areas, workload-level architecture review</li>
+      <li><strong>AWS Security Reference Architecture (SRA)</strong> — Prescriptive multi-account network + security design</li>
+      <li><strong>CIS AWS Foundations Benchmark v5.0.0</strong> — 39 automated configuration controls</li>
+      <li><strong>NIST CSF</strong> — Identify, Protect, Detect, Respond, Recover (regulatory mapping)</li>
+      <li><strong>ProServe 5 Core Epics</strong> — IAM, Infrastructure Security, Data Protection, Detective Controls, Incident Response</li>
+    </ul>
+  </section>
+
+</div>
+
+<footer>Compiled from AWS Cloud Internet Breakout Assessment — Speaking Notes &amp; Framework References</footer>
+
+<script>
+  const tabs = [
+    ["s1", "1. Set the Stage"],
+    ["s2", "2. Frameworks"],
+    ["s3", "3. Deliverables"],
+    ["s4", "4. Process"],
+    ["s5", "5. What We Need"],
+    ["s6", "6. Trust Builders"],
+    ["s7", "7. Cheat Sheet"]
+  ];
+  const tabBar = document.getElementById("tabs");
+  tabs.forEach(([id, label], i) => {
+    const btn = document.createElement("button");
+    btn.className = "tab-btn" + (i === 0 ? " active" : "");
+    btn.textContent = label;
+    btn.onclick = () => selectTab(id);
+    btn.dataset.tab = id;
+    tabBar.appendChild(btn);
+  });
+  function selectTab(id) {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === id));
+    document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.dataset.tab === id));
+  }
+  selectTab("s1");
+</script>
+
+
+
+</body></html>

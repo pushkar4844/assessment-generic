@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>AWSome Accelerator – Field SA Guide: Discovery Questions</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #555;
+    --accent: #FF9900;
+    --header-bg: #111;
+    --header-fg: #eee;
+    --tab-bg: #f4f4f4;
+    --tab-active-bg: #232f3e;
+    --tab-active-fg: #fff;
+    --border: #ddd;
+    --link: #0066cc;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    box-sizing: border-box;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14181f;
+      --fg: #e8e8e8;
+      --muted: #a0a0a0;
+      --tab-bg: #1f2530;
+      --border: #333;
+      --link: #6fb3ff;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14181f;
+    --fg: #e8e8e8;
+    --muted: #a0a0a0;
+    --tab-bg: #1f2530;
+    --border: #333;
+    --link: #6fb3ff;
+  }
+  html, body {
+    height: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+  }
+  header {
+    background: var(--header-bg);
+    color: var(--header-fg);
+    padding: 20px 16px calc(20px + env(safe-area-inset-top, 0px));
+    padding-top: calc(20px + env(safe-area-inset-top, 0px));
+    text-align: center;
+    border-bottom: 3px solid var(--accent);
+  }
+  header h1 {
+    margin: 0;
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+  }
+  header p {
+    margin: 6px 0 0;
+    color: #bbb;
+    font-size: 0.9rem;
+  }
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    background: var(--bg);
+    padding: 10px 0;
+    z-index: 10;
+    border-bottom: 1px solid var(--border);
+  }
+  .tab-btn {
+    background: var(--tab-bg);
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 0.82rem;
+    cursor: pointer;
+  }
+  .tab-btn.active {
+    background: var(--tab-active-bg);
+    color: var(--tab-active-fg);
+    border-color: var(--tab-active-bg);
+  }
+  section.panel {
+    display: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 18px;
+  }
+  section.panel.active {
+    display: block;
+  }
+  h2.panel-title {
+    margin-top: 0;
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    font-size: 1.2rem;
+  }
+  h3 {
+    font-size: 1rem;
+    margin: 18px 0 6px;
+  }
+  ul {
+    margin: 4px 0 12px;
+    padding-left: 22px;
+  }
+  li {
+    margin-bottom: 6px;
+  }
+  .muted {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  a {
+    color: var(--link);
+    word-break: break-word;
+  }
+  .related-services li {
+    margin-bottom: 4px;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.8rem;
+    padding: 24px 16px calc(24px + env(safe-area-inset-bottom, 0px));
+  }
+  ::-webkit-scrollbar { height: 6px; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>AWSome Accelerator</h1>
+  <p>Field SA Guide — Diving Deep: Technology Landscape Discovery Questions</p>
+</header>
+
+<div class="container">
+  <div class="tabs" id="tabs"><button class="tab-btn active" data-tab="strategy">Strategy</button><button class="tab-btn" data-tab="security">Security</button><button class="tab-btn" data-tab="compute">Compute</button><button class="tab-btn" data-tab="analytics">Analytics</button><button class="tab-btn" data-tab="backupdr">Backup/DR</button><button class="tab-btn" data-tab="databases">Databases</button><button class="tab-btn" data-tab="datatransfer">Data Transfer</button><button class="tab-btn" data-tab="euc">End User Computing</button><button class="tab-btn" data-tab="contentdelivery">Content Delivery</button><button class="tab-btn" data-tab="storage">Storage</button><button class="tab-btn" data-tab="isv">ISV</button></div>
+
+  <!-- STRATEGY -->
+  <section class="panel active" data-tab="strategy">
+    <h2 class="panel-title">Strategy</h2>
+    <ul>
+      <li>How does the system support the customer's business? (e.g. CRM logs customer interactions and integrates with ERP for fulfillment)</li>
+      <li>How does the system scale as the business grows? What are the growth constraints? (e.g. servers, storage, people)</li>
+      <li>How does the system handle business continuity?</li>
+      <li>What are the technologies used in the system? (e.g. Oracle, OpenJDK, Javascript, Linux, VMWare)</li>
+      <li>How does the system integrate with other systems? (web hooks, integration broker, etc)</li>
+      <li>What are the peak performance metrics for the system? When does the system require peak performance? (e.g. maximum transactions per second, maximum tenants per cluster, etc)</li>
+      <li>What teams support the systems? (e.g. development, operations, DBA)</li>
+      <li>How does the team build and deploy the system? (e.g. Gradle, Jenkins, Ansible)</li>
+      <li>How do the teams test the systems? (e.g. manual, automated functional regression, unit tests, integration tests)</li>
+      <li>How does the team monitor the system for security, application, and performance incidents?</li>
+      <li>What are the system's incident response processes?</li>
+      <li>How do the team predict failure or service level violations? (e.g. AIOps)</li>
+      <li>How do you support the end users of the system? (e.g. ticketing systems, call/contact center)</li>
+      <li>How could the system generate more value if augmented with AI/ML?</li>
+      <li>Could the system's data provide insights to increase efficiency, drive growth via cross/upsell opportunities, etc.?</li>
+    </ul>
+
+    <h3>Technology Landscape</h3>
+    <ul>
+      <li>How does the technology organization serve the business? Are there dedicated teams for each business unit? Does a single team serve all the business units?</li>
+      <li>What regulatory constraints do you have? (e.g. HIPAA compliance, Office of the Comptroller of the Currency (OCC) audits, FINRA compliance, etc)</li>
+      <li>What drives the buy vs build decision? (e.g. customer buys accounting and HR systems but builds development tools)</li>
+      <li>Do you have an AI and ML strategy for augmenting or automating your business processes? (automating document workflows, information retrieval from unstructured data, etc)</li>
+      <li>Do you have a strategy to derive business insights from your data? (e.g. a "Customer 360" strategy by pulling data from CRM, customer success, and ERP system into a single view and data lake)</li>
+      <li>Do you have a strategy to monetize your data? (e.g. improving credit quality decisions using payment data, improving rating models through driver telematics, predictive maintenance program through IoT and service history)</li>
+      <li>What is your overall application integration strategy? (Enterprise service bus/integration broker (Mulesoft, Informatica, Boomi), point to point, etc.)</li>
+      <li>What is the software delivery process? (Scrum, Agile, XP, Waterfall)</li>
+      <li>What do you use for development tools, databases, application monitoring tools, security monitoring tools, continuous integration (CI), continuous delivery (CD)?</li>
+      <li>What percentage of technology infrastructure is in the cloud? What percentage is in AWS?</li>
+      <li>Does your IT strategy explicitly state cloud's role and how it is tied to your business objectives?</li>
+      <li>Where do you want to invest in infrastructure – innovation vs. application outcomes?</li>
+      <li>Are you aligning strategy on both cost out and innovation?</li>
+    </ul>
+  </section>
+
+  <!-- SECURITY -->
+  <section class="panel" data-tab="security">
+    <h2 class="panel-title">Security</h2>
+    <ul>
+      <li>What are the security compliance requirements? (SOC2, ISO 27001, HIPAA, etc)</li>
+      <li>Does your organization have a security and compliance program?</li>
+      <li>What tools or services are being used for security control?</li>
+      <li>What regulations does your organization need to comply with?</li>
+      <li>How would you characterize your organization's approach to security and compliance? Do you find it effective and efficient at managing risk?</li>
+      <li>To what extent are you incorporating data analytics into your operational risk management program?</li>
+      <li>Are there risk and compliance management practices that you feel would benefit from a more data driven approach?</li>
+      <li>What are the most resource intensive areas of your security and compliance program?</li>
+      <li>What are the main cost drivers, and where do you see opportunities for increased automation of manual processes?</li>
+      <li>At a high level, how would you characterize your organization's approach to security and compliance? How integrated and consistent would you say it is across lines of business?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Do you currently have central pane of glass view into your AWS security posture?</li>
+      <li>Do you currently or plan on storing or processing protected data?</li>
+      <li>What 3rd party products are you currently using on premise / on AWS?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A27&amp;tab=view_all">Kiku Learning Library — Security</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon Cognito: <a href="https://aws.amazon.com/cognito/">aws.amazon.com/cognito/</a></li>
+      <li>Amazon Detective: <a href="https://aws.amazon.com/detective">aws.amazon.com/detective</a></li>
+      <li>Amazon GuardDuty: <a href="https://aws.amazon.com/guardduty/">aws.amazon.com/guardduty/</a></li>
+      <li>Amazon Inspector: <a href="https://aws.amazon.com/inspector/">aws.amazon.com/inspector/</a></li>
+      <li>Amazon Macie: <a href="https://aws.amazon.com/macie/">aws.amazon.com/macie/</a></li>
+      <li>AWS Artifact: <a href="https://aws.amazon.com/artifact/">aws.amazon.com/artifact/</a></li>
+      <li>AWS Certificate Manager: <a href="https://aws.amazon.com/certificate-manager/">aws.amazon.com/certificate-manager/</a></li>
+      <li>AWS CloudHSM: <a href="https://aws.amazon.com/cloudhsm/">aws.amazon.com/cloudhsm/</a></li>
+      <li>AWS Directory Service: <a href="https://aws.amazon.com/directoryservice/">aws.amazon.com/directoryservice/</a></li>
+      <li>AWS Firewall Manager: <a href="https://aws.amazon.com/firewall-manager/">aws.amazon.com/firewall-manager/</a></li>
+      <li>AWS IAM: <a href="https://aws.amazon.com/iam/">aws.amazon.com/iam/</a></li>
+      <li>AWS KMS: <a href="https://aws.amazon.com/kms/">aws.amazon.com/kms/</a></li>
+    </ul>
+  </section>
+
+  <!-- COMPUTE -->
+  <section class="panel" data-tab="compute">
+    <h2 class="panel-title">Compute</h2>
+    <ul>
+      <li>What applications are running on top of your servers?</li>
+      <li>How many corresponding design, development, test, QA, staging, pre-production, disaster recovery environments are you running?</li>
+      <li>What are the operating systems for your server systems?</li>
+      <li>Are you running into any performance issues or management overhead?</li>
+      <li>How many servers do you manage today?</li>
+      <li>How many IT admins are managing the servers? How are they keeping up with growing number of servers?</li>
+      <li>What is the RTO and RPO for the server failures?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>What are the top pain points of running your existing server environment?</li>
+      <li>Do you have a robust disaster recovery plan for your critical servers?</li>
+      <li>Have you considered using cloud for DR?</li>
+      <li>Have you thought of migrating off Windows to Linux alternatives?</li>
+      <li>Would you like to do a migration evaluation for your existing servers to AWS EC2 or serverless?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A20&amp;tab=view_all">Kiku Learning Library — Compute</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon EC2: <a href="https://aws.amazon.com/ec2/">aws.amazon.com/ec2/</a></li>
+      <li>Amazon EC2 Auto Scaling: <a href="https://aws.amazon.com/ec2/autoscaling/">aws.amazon.com/ec2/autoscaling/</a></li>
+      <li>Amazon Elastic Beanstalk: <a href="https://aws.amazon.com/elasticbeanstalk/">aws.amazon.com/elasticbeanstalk/</a></li>
+      <li>Elastic Container Registry: <a href="https://aws.amazon.com/ecr/">aws.amazon.com/ecr/</a></li>
+      <li>Elastic Container Service: <a href="https://aws.amazon.com/containers/services/">aws.amazon.com/containers/services/</a></li>
+      <li>Elastic Kubernetes Service: <a href="https://aws.amazon.com/eks/">aws.amazon.com/eks/</a></li>
+      <li>AWS Fargate: <a href="https://aws.amazon.com/fargate/">aws.amazon.com/fargate/</a></li>
+      <li>AWS Lambda: <a href="https://aws.amazon.com/lambda/">aws.amazon.com/lambda/</a></li>
+      <li>AWS Lightsail: <a href="https://aws.amazon.com/lightsail/">aws.amazon.com/lightsail/</a></li>
+      <li>AWS Outposts: <a href="https://aws.amazon.com/outposts/">aws.amazon.com/outposts/</a></li>
+      <li>AWS Serverless Application Repository: <a href="https://aws.amazon.com/serverless/serverlessrepo/">aws.amazon.com/serverless/serverlessrepo/</a></li>
+      <li>VMware Cloud on AWS: <a href="https://cloud.vmware.com/vmc-aws">cloud.vmware.com/vmc-aws</a></li>
+      <li>AWS Wavelength: <a href="https://aws.amazon.com/wavelength/">aws.amazon.com/wavelength/</a></li>
+      <li>AWS Batch: <a href="https://aws.amazon.com/batch/">aws.amazon.com/batch/</a></li>
+    </ul>
+  </section>
+
+  <!-- ANALYTICS -->
+  <section class="panel" data-tab="analytics">
+    <h2 class="panel-title">Analytics</h2>
+    <ul>
+      <li>What type of data are you working with and where does it come from?</li>
+      <li>Are these data structured, unstructured, or semi-structured?</li>
+      <li>What you will want to do with the data? E.g. store now analyze later, or operational reporting</li>
+      <li>How are you currently capturing and storing your data? What tools and databases are in use?</li>
+      <li>What is your strategy for data management and governance?</li>
+      <li>How complex is your data acquisition process?</li>
+      <li>What is your current ETL process?</li>
+      <li>What type of skills exist in your organization? E.g. DBA, IT engineers, big data engineers</li>
+      <li>How do you currently manage data?</li>
+      <li>How does all this go with your organization's culture?</li>
+      <li>What are your plans to address regulation?</li>
+      <li>What are the top pain points of running your existing data analytics environment?</li>
+      <li>Are there particular areas where you would like to apply analytics or AI/ML technologies (but haven't yet)?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you looking to migrate some or all of your data analytics workload to the cloud?
+        <ul><li>If so, what are your specific requirements and timeline?</li></ul>
+      </li>
+      <li>Do you have partners to help you with the migration?</li>
+      <li>Would you be interested in knowing AWS data lake and analytics offerings?</li>
+      <li>Would you like to do a migration evaluation for your existing data analytics to AWS Redshift or data lake?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul>
+      <li><a href="https://amazonwebservices.mindtickle.com/?_branch_match_id=735651251973410808#/courses/series/1284153514833126012?series=1284153514833126012">Mindtickle LevelUP! Analytics course</a></li>
+      <li><a href="https://amazonwebservices.mindtickle.com/?_branch_match_id=735651251973410808#/courses/series/1239948442897393076?series=1239948442897393076">Mindtickle Analytics Sales Play course</a></li>
+      <li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A107&amp;tab=view_all">Kiku Analytics courses</a></li>
+    </ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon Athena: <a href="https://aws.amazon.com/athena/">aws.amazon.com/athena/</a></li>
+      <li>Amazon ElasticSearch: <a href="https://aws.amazon.com/elasticsearch-service/">aws.amazon.com/elasticsearch-service/</a></li>
+      <li>Amazon EMR: <a href="https://aws.amazon.com/emr/">aws.amazon.com/emr/</a></li>
+      <li>Amazon Kinesis: <a href="https://aws.amazon.com/kinesis/">aws.amazon.com/kinesis/</a></li>
+      <li>Amazon MSK: <a href="https://aws.amazon.com/msk/">aws.amazon.com/msk/</a></li>
+    </ul>
+  </section>
+
+  <!-- BACKUP/DR -->
+  <section class="panel" data-tab="backupdr">
+    <h2 class="panel-title">Backup/DR</h2>
+    <ul>
+      <li>Do you currently have a Disaster Recovery Plan (DRP)?</li>
+      <li>What is the overall RTO and RPO defined?</li>
+      <li>What tools and/or vendors are you using for DR?</li>
+      <li>Can you describe your DR processes in general?</li>
+      <li>How often do you conduct DR test or exercises?</li>
+      <li>Can you tell me your most recent DR experience?
+        <ul>
+          <li>Areas of focus: Policies</li>
+          <li>Procedures</li>
+          <li>Organization</li>
+          <li>RTOs and RPOs (business vs technical)</li>
+          <li>Date of DRP last updated</li>
+          <li>DR exercise frequency and last exercise date</li>
+          <li>Are staff trained on DRP</li>
+          <li>Does everyone understand their roles within the DRP</li>
+          <li>Are there any SLA considerations, if so, what are they?</li>
+          <li>Are there any security considerations, if so, what are they?</li>
+        </ul>
+      </li>
+      <li>What is the backup solution being used in your environment?</li>
+      <li>How much data are you protecting in your environment?</li>
+      <li>Where are you storing the backup data today?</li>
+      <li>Can you describe your backup processes in general?</li>
+      <li>How often do you run backup jobs?</li>
+      <li>What are the main applications and data type you are backing up?</li>
+      <li>Are you sending your backup data offsite or to the cloud?</li>
+      <li>Is your DR based on restoring from backup data?
+        <ul>
+          <li>Areas of focus: Backup architecture</li>
+          <li>Backup policy (source data, frequency, retention etc.)</li>
+          <li>Backup full capacity (breakdown by files, databases, applications, etc.)</li>
+          <li>Backup medium: disk, tape, cloud, offsite?</li>
+          <li>Backup window</li>
+          <li>How often do you test recovery from backup?</li>
+          <li>Are there procedures for recovery from backup?</li>
+          <li>Organization structure</li>
+          <li>Do you offer SLAs to business groups?</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you interested in discussing ways to modernize your backup process without changing your workflow using the AWS cloud?</li>
+      <li>Are you using a backup vendor with a connector that allows backups to be written to S3?</li>
+      <li>Would you be interested in knowing AWS backup and DR automation solutions?</li>
+      <li>Would you like to do a POC using AWS backup and DR services?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul>
+      <li><a href="https://kiku.aws.training/Details/eLearning?id=19597">Introduction to Backup and Restore with AWS</a></li>
+      <li><a href="https://kiku.aws.training/Details/eLearning?id=50309">CloudEndure Disaster Recovery Technical Training</a></li>
+    </ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>AWS Backup: <a href="https://aws.amazon.com/backup/">aws.amazon.com/backup/</a></li>
+      <li>CloudEndure Disaster Recovery: <a href="https://aws.amazon.com/cloudendure-disaster-recovery/">aws.amazon.com/cloudendure-disaster-recovery/</a></li>
+      <li>Amazon S3: <a href="https://aws.amazon.com/s3/">aws.amazon.com/s3/</a></li>
+      <li>Amazon S3 Glacier: <a href="https://aws.amazon.com/glacier/">aws.amazon.com/glacier/</a></li>
+    </ul>
+  </section>
+
+  <!-- DATABASES -->
+  <section class="panel" data-tab="databases">
+    <h2 class="panel-title">Databases</h2>
+    <ul>
+      <li>What database technology is currently supporting your applications?</li>
+      <li>What applications are running on top of your databases? Please name them specifically.</li>
+      <li>How large is this workload(s) in terms of infrastructure requirements? Servers, storage, networking, support staff, etc.</li>
+      <li>How many corresponding design, development, test, QA, staging, pre-production, disaster recovery environments are you running?</li>
+      <li>What middleware software are you running alongside the database systems? E.g. WebLogic, HTTP server or listener, identity management, etc.</li>
+      <li>Are you running into any performance issues or management overhead?</li>
+      <li>How many databases do you run today? Which databases are they and their versions?</li>
+      <li>How many DBAs manage the databases? How are they keeping up with growing number of databases?</li>
+      <li>What is the RTO and RPO for the databases?</li>
+      <li>How long do the database data need to be queried?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>What are the top pain points of running your existing database environment?</li>
+      <li>Do you have a robust disaster recovery plan for your critical databases?</li>
+      <li>Have you considered using cloud for DR?</li>
+      <li>Have you thought of migrating off proprietary databases and option open source alternatives?</li>
+      <li>Would you like to do a migration evaluation for your existing databases to AWS RDS?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul>
+      <li><a href="https://amazonwebservices.mindtickle.com/?_branch_match_id=735651251973410808#/courses/series/1284152790641479288?series=1284152790641479288">Mindtickle Database course</a></li>
+      <li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A71&amp;tab=view_all">Kiku Databases courses</a></li>
+    </ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon RDS: <a href="https://aws.amazon.com/rds/">aws.amazon.com/rds/</a></li>
+      <li>Amazon Aurora: <a href="https://aws.amazon.com/rds/aurora/">aws.amazon.com/rds/aurora/</a></li>
+      <li>Amazon DocumentDB: <a href="https://aws.amazon.com/documentdb/">aws.amazon.com/documentdb/</a></li>
+      <li>Amazon DynamoDB: <a href="https://aws.amazon.com/dynamodb/">aws.amazon.com/dynamodb/</a></li>
+      <li>Amazon ElastiCache: <a href="https://aws.amazon.com/elasticache/">aws.amazon.com/elasticache/</a></li>
+      <li>Amazon Keyspaces: <a href="https://aws.amazon.com/keyspaces/">aws.amazon.com/keyspaces/</a></li>
+      <li>Amazon Neptune: <a href="https://aws.amazon.com/neptune/">aws.amazon.com/neptune/</a></li>
+      <li>Amazon Timestream: <a href="https://aws.amazon.com/timestream/">aws.amazon.com/timestream/</a></li>
+      <li>AWS Database Migration Service: <a href="https://aws.amazon.com/dms/">aws.amazon.com/dms/</a></li>
+      <li>AWS Database Migration Accelerator: <a href="https://aws.amazon.com/solutions/databasemigrations/database-migration-accelerator/">aws.amazon.com/solutions/databasemigrations/database-migration-accelerator/</a></li>
+    </ul>
+  </section>
+
+  <!-- DATA TRANSFER -->
+  <section class="panel" data-tab="datatransfer">
+    <h2 class="panel-title">Data Transfer</h2>
+    <ul>
+      <li>How much data do you plan to transfer to AWS?</li>
+      <li>What is your internet bandwidth?</li>
+      <li>What is the ETA for the transfer?</li>
+      <li>What are the sources of the data transfer?</li>
+      <li>What are the targets of the data transfer? E.g. S3, EFS, FSx, EC2, RDS, etc.</li>
+      <li>Any preference on data transfer protocols? E.g. FTP, SFTP, FTPS, etc.</li>
+      <li>Can you provide a list of your existing file servers and NAS devices and their OS versions and models?</li>
+      <li>Can you provide a list of your existing block storage devices and their models?</li>
+      <li>Can you provide a list of your existing object storage devices and their models?</li>
+      <li>What is your existing backup solution and backup storage in use? Is backup data deduped?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul><li>Any requirement or preferred tools for the data transfer project?</li></ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A31&amp;tab=view_all">AWS Migration and Transfer courses on Kiku</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>AWS DataSync: <a href="https://aws.amazon.com/datasync/">aws.amazon.com/datasync/</a></li>
+      <li>AWS Transfer Family: <a href="https://aws.amazon.com/aws-transfer-family/">aws.amazon.com/aws-transfer-family/</a></li>
+      <li>Amazon S3 Transfer Acceleration: <a href="https://docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html">docs.aws.amazon.com/AmazonS3/latest/dev/transfer-acceleration.html</a></li>
+      <li>Amazon Snow Family: <a href="https://aws.amazon.com/snow/">aws.amazon.com/snow/</a></li>
+      <li>Amazon Kinesis Data Firehose: <a href="https://aws.amazon.com/kinesis/data-firehose/">aws.amazon.com/kinesis/data-firehose/</a></li>
+    </ul>
+  </section>
+
+  <!-- END USER COMPUTING -->
+  <section class="panel" data-tab="euc">
+    <h2 class="panel-title">End User Computing</h2>
+    <ul>
+      <li>Do you currently have a VDI solution on-prem? What is it?</li>
+      <li>How are you enabling your employees to remotely access the applications they need?</li>
+      <li>How do you plan to give remote workers secure access to your corporate network?</li>
+      <li>What percent of your on-prem footprint is to run VDI solution?</li>
+      <li>How are you supporting your employees to engage with each other using audio and video conferencing at scale?</li>
+      <li>How are you keeping your contact center operational while your staff are all working from home?</li>
+      <li>How long does it take to scale (or on-board) new users?</li>
+      <li>How do you handle data security and user access for your contingent workforce?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you thinking of setting up cloud based virtual workstations for new employees or contractors?</li>
+      <li>Are you thinking of migrating your on-prem VDI infrastructure to the cloud?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A65&amp;tab=view_all">Kiku Desktop &amp; App Streaming courses</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon Workspaces: <a href="https://aws.amazon.com/workspaces/">aws.amazon.com/workspaces/</a></li>
+      <li>Amazon AppStream 2.0: <a href="https://aws.amazon.com/appstream2/">aws.amazon.com/appstream2/</a></li>
+      <li>Amazon WorkLink: <a href="https://aws.amazon.com/worklink/">aws.amazon.com/worklink/</a></li>
+      <li>Amazon WorkDocs: <a href="https://aws.amazon.com/workdocs/">aws.amazon.com/workdocs/</a></li>
+    </ul>
+  </section>
+
+  <!-- CONTENT DELIVERY -->
+  <section class="panel" data-tab="contentdelivery">
+    <h2 class="panel-title">Content Delivery</h2>
+    <ul>
+      <li>What is your current network topology? Including LAN and WAN</li>
+      <li>Do you have any workload running in the cloud?</li>
+      <li>What is your network management system and tool?</li>
+      <li>Can you share any network architecture diagram?</li>
+      <li>How much bandwidth do you have for internet access?</li>
+      <li>How do your branches and remote sites access internet?</li>
+      <li>Do you use on-prem DNS servers or cloud based DNS?</li>
+      <li>What is your RTO for network failure?</li>
+      <li>What is your RTO for network infrastructure recovery in DR?</li>
+      <li>Do you require Layer 2 extension to connect to the cloud platform?</li>
+      <li>What are the top pain points with your existing network environment?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you interested in learning more about AWS networking?</li>
+      <li>Are you interested in a deep dive/immersion day on network and content delivery infrastructure?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <p class="muted">TBD</p>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>Amazon VPC: <a href="https://aws.amazon.com/vpc/">aws.amazon.com/vpc/</a></li>
+      <li>Amazon API Gateway: <a href="https://aws.amazon.com/api-gateway/">aws.amazon.com/api-gateway/</a></li>
+      <li>Amazon CloudFront: <a href="https://aws.amazon.com/cloudfront/">aws.amazon.com/cloudfront/</a></li>
+      <li>Amazon Route 53: <a href="https://aws.amazon.com/route53/">aws.amazon.com/route53/</a></li>
+      <li>AWS App Mesh: <a href="https://aws.amazon.com/app-mesh/">aws.amazon.com/app-mesh/</a></li>
+      <li>AWS Cloud Map: <a href="https://aws.amazon.com/cloud-map/">aws.amazon.com/cloud-map/</a></li>
+      <li>AWS Direct Connect: <a href="https://aws.amazon.com/directconnect/">aws.amazon.com/directconnect/</a></li>
+      <li>AWS Global Accelerator: <a href="https://aws.amazon.com/global-accelerator/">aws.amazon.com/global-accelerator/</a></li>
+      <li>AWS PrivateLink: <a href="https://aws.amazon.com/privatelink/">aws.amazon.com/privatelink/</a></li>
+      <li>AWS Transit Gateway: <a href="https://aws.amazon.com/transit-gateway/">aws.amazon.com/transit-gateway/</a></li>
+    </ul>
+  </section>
+
+  <!-- STORAGE -->
+  <section class="panel" data-tab="storage">
+    <h2 class="panel-title">Storage</h2>
+    <ul>
+      <li>What type of storage devices (SAN, NAS, Tape) are deployed?</li>
+      <li>What is the total storage capacity in your existing environment?</li>
+      <li>Do you have object storage device in your environment?</li>
+      <li>Do you have tape storage device in your environment?</li>
+      <li>What types of file sharing protocols are in use? CIFS, NFS, or others</li>
+      <li>Do storage devices have performance bottlenecks?</li>
+      <li>What is the ratio between unstructured and structured data?</li>
+      <li>What is the yearly storage capacity increase rate in the past three years?</li>
+      <li>Is storage space generally sufficient? What is the average space usage?</li>
+      <li>Do you utilize HA or clustering technologies for storage devices?</li>
+      <li>Do you replicate storage data offsite for DR purpose?</li>
+      <li>What are the top pain points with your existing storage environment?</li>
+    </ul>
+
+    <h3>Opportunity Information</h3>
+    <ul>
+      <li>Are you looking to migrate some or all of your storage to the cloud?</li>
+      <li>Do you have partners to help you with the migration?</li>
+      <li>Would you be interested in knowing AWS storage offerings?</li>
+      <li>Would you like to do a POC using AWS storage offerings?</li>
+    </ul>
+
+    <h3>Training Material</h3>
+    <ul><li><a href="https://kiku.aws.training/LearningLibrary?filters=language%3A1&amp;filters=classification%3A29&amp;tab=view_all">Kiku Storage courses</a></li></ul>
+
+    <h3>Related Services</h3>
+    <ul class="related-services">
+      <li>AWS Backup: <a href="https://aws.amazon.com/backup/">aws.amazon.com/backup/</a></li>
+      <li>Amazon S3: <a href="https://aws.amazon.com/s3/">aws.amazon.com/s3/</a></li>
+      <li>Amazon S3 Glacier: <a href="https://aws.amazon.com/glacier/">aws.amazon.com/glacier/</a></li>
+      <li>AWS Storage Gateway: <a href="https://aws.amazon.com/storagegateway/">aws.amazon.com/storagegateway/</a></li>
+      <li>Amazon EBS: <a href="https://aws.amazon.com/ebs/">aws.amazon.com/ebs/</a></li>
+      <li>Amazon EFS: <a href="https://aws.amazon.com/efs/">aws.amazon.com/efs/</a></li>
+      <li>Amazon FSx: <a href="https://aws.amazon.com/fsx/">aws.amazon.com/fsx/</a></li>
+      <li>AWS Transfer Family: <a href="https://aws.amazon.com/aws-transfer-family/">aws.amazon.com/aws-transfer-family/</a></li>
+      <li>AWS Snow Family: <a href="https://aws.amazon.com/snow/">aws.amazon.com/snow/</a></li>
+    </ul>
+  </section>
+
+  <!-- ISV -->
+  <section class="panel" data-tab="isv">
+    <h2 class="panel-title">ISV</h2>
+
+    <h3>General</h3>
+    <ul><li>Which of your current software applications are most critical to your operations?</li></ul>
+
+    <h3>Security</h3>
+    <ul><li>What security tools do you currently use to protect your business?</li></ul>
+
+    <h3>Backup/Storage</h3>
+    <ul><li>Do you have a backup/DR plan in place? Which tools do you use?</li></ul>
+
+    <h3>Networking</h3>
+    <ul><li>What services/tools do you currently use for networking?</li></ul>
+
+    <h3>Data and Analytics</h3>
+    <ul><li>What tools do you use today to manage and action your data?</li></ul>
+
+    <h3>Observability</h3>
+    <ul><li>What tools do you currently use for capturing, storing and processing logs, metrics &amp; traces?</li></ul>
+
+    <h3>Business Apps</h3>
+    <ul><li>What other applications are critical for other parts of your organization such as sales, marketing, HR, etc.?</li></ul>
+  </section>
+
+</div>
+
+<footer>Compiled from AWSome Accelerator — Field SA Guide screenshots</footer>
+
+<script>
+  const tabs = [
+    ["strategy", "Strategy"],
+    ["security", "Security"],
+    ["compute", "Compute"],
+    ["analytics", "Analytics"],
+    ["backupdr", "Backup/DR"],
+    ["databases", "Databases"],
+    ["datatransfer", "Data Transfer"],
+    ["euc", "End User Computing"],
+    ["contentdelivery", "Content Delivery"],
+    ["storage", "Storage"],
+    ["isv", "ISV"]
+  ];
+  const tabBar = document.getElementById("tabs");
+  tabs.forEach(([id, label], i) => {
+    const btn = document.createElement("button");
+    btn.className = "tab-btn" + (i === 0 ? " active" : "");
+    btn.textContent = label;
+    btn.onclick = () => selectTab(id);
+    btn.dataset.tab = id;
+    tabBar.appendChild(btn);
+  });
+  function selectTab(id) {
+    document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("active", b.dataset.tab === id));
+    document.querySelectorAll(".panel").forEach(p => p.classList.toggle("active", p.dataset.tab === id));
+  }
+  selectTab("strategy");
+</script>
+
+
+
+</body></html>
