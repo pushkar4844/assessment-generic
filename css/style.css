@@ -68,6 +68,52 @@ header.site-header p { margin: 8px 0 0; color: #bbb; font-size: 0.92rem; }
 
 .wrap { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
 
+.downloads {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-left: 4px solid var(--accent);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin-bottom: 32px;
+  scroll-margin-top: 16px;
+}
+
+.downloads h2 { margin: 0 0 4px; font-size: 1.15rem; }
+.downloads p { margin: 0 0 14px; color: var(--page-muted); font-size: 0.88rem; }
+
+.download-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1 1 280px;
+  padding: 12px 16px;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #111;
+  text-decoration: none;
+  border: 1px solid var(--accent);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover, .btn:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  outline: none;
+}
+
+.btn-title { font-weight: 700; font-size: 0.95rem; }
+.btn-meta { font-size: 0.78rem; opacity: 0.85; }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--page-fg);
+  border-color: var(--card-border);
+}
+
+.btn-secondary:hover, .btn-secondary:focus-visible { border-color: var(--accent); }
+
 .block { margin-bottom: 44px; scroll-margin-top: 16px; }
 .block:last-child { margin-bottom: 0; }
 

@@ -1,6 +1,6 @@
 # assessment-generic
 
-Assessment Call Toolkit &mdash; a small static site for prepping an AWS Cloud Internet Breakout assessment call. Click a box to open its content in a panel: opening introduction, speaking notes, AWS services reference, and the interview playbook.
+Assessment Call Toolkit &mdash; a small static site for prepping an AWS Cloud Internet Breakout assessment call. Four collapsible sections &mdash; opening introduction, speaking notes, AWS services reference and the Cloud Internet Breakout interview playbook &mdash; plus downloadable Excel assessment workbooks.
 
 Live site: https://pushkar4844.github.io/assessment-generic/
 
@@ -8,12 +8,13 @@ Live site: https://pushkar4844.github.io/assessment-generic/
 
 ```
 .
-├── index.html          # landing page with the 4 clickable boxes
+├── index.html          # single page: 4 collapsible sections + download buttons
 ├── css/
 │   └── style.css       # page styling (light/dark aware)
-├── js/
-│   └── main.js         # opens the clicked box's content in an overlay iframe
-└── content/
+├── downloads/
+│   ├── FAB_AWS_Cloud_Internet_Breakout_SOW_Assessment.xlsx   # SOW-aligned assessment workbook
+│   └── AWS_Cloud_Internet_Breakout_Assessment.xlsx           # generic assessment workbook
+└── content/            # standalone tabbed copies of each section (not used by index.html)
     ├── intro.html          # Opening Introduction
     ├── notes.html          # Speaking Notes
     ├── aws-services.html   # AWS Services Reference
