@@ -745,7 +745,16 @@
         <ul><li>Example: Do SCPs prevent disabling CloudTrail, leaving certain regions, or creating public S3 buckets?</li></ul>
       </li>
     </ul>
-    <div class="mapping"><strong>What you're mapping:</strong> [Tab 8 — Compliance &amp; Governance: Account Structure] + [Tab 4 — IAM: SCPs]</div>
+
+    <h3>Design Baseline &amp; Infrastructure as Code</h3>
+    <ul>
+      <li>What security, availability and operational requirements must the internet breakout design meet? Are they documented, and can each design decision be traced back to one?</li>
+      <li>Is there an approved high-level and low-level design with current diagrams? Who approved it, and has the deployed environment been compared against it?</li>
+      <li>Is the breakout built with Terraform or CloudFormation? Does the code cover everything — VPCs, Transit Gateway, routes, load balancers, NAT, endpoints — or were some resources created by hand?</li>
+      <li>How is IaC state stored and protected, and how are changes reviewed, approved and promoted?</li>
+      <li>Do you detect drift between the code and what is actually deployed? When was that last checked?</li>
+    </ul>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 8 — Compliance &amp; Governance: Account Structure] + [Tab 4 — IAM: SCPs] + [SOW workbook — Architecture Review: ARC-001 to ARC-006, ARC-039 to ARC-043]</div>
     <div class="why"><strong>Why this matters first:</strong> If the foundation is shaky (no multi-account strategy, no guardrails, no centralized networking account), everything downstream is at risk. This sets the tone.</div>
   </section>
 
@@ -760,6 +769,8 @@
       <li>What's your CIDR planning approach? Any overlapping ranges? How much room for growth?</li>
       <li>Are workloads deployed across multiple Availability Zones?</li>
       <li>Do you have a dedicated Inspection VPC or Egress VPC for centralized internet breakout?</li>
+      <li>Do you use AZ IDs (not just AZ names) consistently across accounts, so subnets and appliances really line up?</li>
+      <li>How many AZs does the breakout span, and is every component — NAT, load balancer endpoints, appliances, Transit Gateway attachments — present in each?</li>
     </ul>
 
     <h3>Internet Breakout Path (THE CORE)</h3>
@@ -777,12 +788,35 @@
       <li>Are you using AWS Transit Gateway? How are route tables configured?</li>
       <li>Are there any blackhole routes for security isolation?</li>
       <li>Is route propagation enabled, or are routes managed statically?</li>
+      <li>Are there separate Transit Gateway route tables for spokes, inspection, egress and on-premises? Where does each default route point?</li>
+      <li>Is appliance mode enabled on the Transit Gateway attachment for the inspection VPC?</li>
+      <li>Are you close to any Transit Gateway limits — attachments, routes, bandwidth per attachment?</li>
+    </ul>
+
+    <h3>Internet Gateway &amp; NAT Gateway</h3>
+    <ul>
+      <li>Which VPCs have an Internet Gateway attached? Is there any IGW or public subnet in a workload VPC?</li>
+      <li>Is there one NAT Gateway per AZ with AZ-local routes? What happens to egress if one NAT Gateway fails?</li>
+      <li>Do you monitor NAT metrics such as ErrorPortAllocation and packet drops? Have you ever hit port exhaustion or per-destination connection limits?</li>
+      <li>Which egress Elastic IPs do partners or SaaS providers allow-list, and who owns that list?</li>
+      <li>Is IPv6 in use? If so, is it inspected the same way as IPv4, and is an egress-only IGW used?</li>
+    </ul>
+
+    <h3>Load Balancers (ALB / NLB / GWLB)</h3>
+    <ul>
+      <li>Where are ALB, NLB and Gateway Load Balancer used in the design, and for what — ingress, egress, inspection?</li>
+      <li>For the Gateway Load Balancer: how many endpoints per AZ, which route tables point to them, and what are the cross-zone and target-failover settings?</li>
+      <li>What are the health check protocol, port, interval and thresholds? How long does it take to detect an unhealthy appliance?</li>
+      <li>Is the client's source IP preserved through the load balancer and appliance chain? Are idle timeouts aligned across components?</li>
+      <li>Who is allowed to consume the Gateway Load Balancer endpoint service?</li>
     </ul>
 
     <h3>DNS</h3>
     <ul>
       <li>Are you using Route 53 for DNS? Private hosted zones?</li>
       <li>Is Route 53 DNS Firewall enabled to block DNS exfiltration or malicious domains?</li>
+      <li>Are Route 53 Resolver inbound and outbound endpoints deployed in at least two AZs? How is hybrid name resolution with on-premises set up, and could any forwarding loop occur?</li>
+      <li>Can workloads send DNS straight to the internet, or only through the resolver? Is outbound port 53 blocked except to approved servers?</li>
     </ul>
 
     <h3>Hybrid Connectivity</h3>
@@ -791,7 +825,18 @@
       <li>How does on-prem traffic reach the internet — through AWS or through their own breakout?</li>
     </ul>
 
-    <div class="mapping"><strong>What you're mapping:</strong> [Tab 2 — Network Architecture: ALL categories]</div>
+    <h3>Traffic Flow Validation (East-West, Return Path, Steering)</h3>
+    <ul>
+      <li>How is spoke-to-spoke (east-west) traffic handled — through Transit Gateway and inspection, or directly? Which flows are exempt from inspection, and who accepted that risk?</li>
+      <li>For each flow, does the return traffic come back through the same appliance and the same AZ? How did you verify it — flow logs, packet capture?</li>
+      <li>For inbound traffic, is the Internet Gateway edge route table used to steer traffic to inspection, or could traffic reach a workload directly?</li>
+      <li>Has anyone tested that no VPC or subnet can reach the internet without inspection? Can we see the results?</li>
+      <li>Do you use a proxy (explicit or transparent)? Is there any direct-egress path that bypasses it?</li>
+      <li>Which flows are TLS-decrypted for inspection, and which applications are excluded (certificate pinning)?</li>
+      <li>Have paths been validated with Reachability Analyzer or VPC Flow Logs, and are the results documented?</li>
+    </ul>
+
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 2 — Network Architecture: ALL categories] + [SOW workbook — Architecture Review: ARC-007 to ARC-038; Traffic Flow Validation + Traffic Flow Matrix: TRF-001 to TRF-031]</div>
     <div class="why"><strong>Pro tip:</strong> Ask them to share or screen-share their architecture diagram. If they don't have one, that's already a finding.</div>
   </section>
 
@@ -806,6 +851,21 @@
       <li>Are you using stateful rules, stateless rules, or both? What's the rule order (strict or default)?</li>
       <li>Is Network Firewall logging enabled? Where do logs go — S3, CloudWatch, or both?</li>
       <li>Are you inspecting BOTH egress AND ingress traffic through the firewall?</li>
+    </ul>
+
+    <h3>Third-Party Appliances &amp; Integration (NVA, IPS/IDS, WAF, Proxy)</h3>
+    <ul>
+      <li>Which third-party appliances sit in the path — firewall, IPS/IDS, WAF, proxy, anything else? Which vendor, version and support status?</li>
+      <li>Are they deployed behind the Gateway Load Balancer (GENEVE) or route-based? Active-active or active-standby?</li>
+      <li>Is your appliance version supported and tested by the vendor with GENEVE? Have MTU/MSS settings been tested with large packets?</li>
+      <li>What does the appliance answer to health checks, and how does it behave under load or during a config push or upgrade?</li>
+      <li>How are instance size and licensed throughput sized against peak? Could the remaining AZ carry peak after losing one? What is the licence model, and is there a licence server dependency?</li>
+      <li>Do established sessions survive an appliance failure (HA and session sync)?</li>
+      <li>Is the inline IPS fail-open or fail-closed? Who tunes it and handles false positives?</li>
+      <li>Which applications does the WAF protect, where is it placed relative to inspection, and how are rules moved from count to block?</li>
+      <li>Are inspection services chained (for example firewall, then IPS, then proxy)? In what order, and what happens if one hop fails?</li>
+      <li>How are appliance logs sent to your SIEM, and does visibility continue during a failover?</li>
+      <li>How are appliance configuration, patching and change control managed? Is there a central manager?</li>
     </ul>
 
     <h3>Security Groups &amp; NACLs</h3>
@@ -834,8 +894,8 @@
       <li>Is there end-to-end encryption, or does TLS terminate at the load balancer?</li>
     </ul>
 
-    <div class="mapping"><strong>What you're mapping:</strong> [Tab 3 — Security Controls: ALL categories]</div>
-    <div class="redflag"><strong>Key red flags to listen for:</strong> "We haven't restricted egress yet" / "Security groups are managed per team" / "We don't inspect outbound traffic"</div>
+    <div class="mapping"><strong>What you're mapping:</strong> [Tab 3 — Security Controls: ALL categories] + [SOW workbook — Third-Party Integration: TPI-001 to TPI-029]</div>
+    <div class="redflag"><strong>Key red flags to listen for:</strong> "We haven't restricted egress yet" / "Security groups are managed per team" / "We don't inspect outbound traffic" / "We've never tested the appliance failover" / "Nobody has defined fail-open or fail-closed"</div>
   </section>
 
   <!-- LAYER 3 -->
@@ -914,6 +974,54 @@
     <div class="mapping"><strong>What you're mapping:</strong> [Tab 7 — Incident Response]</div>
   </section>
 
+  <!-- LAYER 6A -->
+  <section class="panel" data-tab="layer6a">
+    <h2 class="panel-title">Layer 6A — High Availability &amp; Resilience</h2>
+    <p class="prompt">"Let's talk about what happens when part of this internet breakout path fails."</p>
+
+    <h3>Multi-AZ &amp; Single Points of Failure</h3>
+    <ul>
+      <li>Could you lose one AZ and still carry full peak load? Has that been tested or only calculated?</li>
+      <li>Are there single points of failure — Elastic IPs, DNS, licence or management servers, configuration sync, identity providers?</li>
+      <li>Do appliances use Auto Scaling with health checks and automatic replacement?</li>
+    </ul>
+
+    <h3>Failure Scenarios</h3>
+    <p>Walk me through what happens, and how long recovery takes, if:</p>
+    <ul>
+      <li>a single appliance instance fails</li>
+      <li>all appliances in one AZ fail</li>
+      <li>a Gateway Load Balancer endpoint or a NAT Gateway fails</li>
+      <li>an entire AZ is impaired</li>
+      <li>a licence, management or threat-feed server becomes unreachable</li>
+      <li>What is your target recovery time for internet connectivity? Is behaviour fail-open or fail-closed, and has that been formally accepted?</li>
+    </ul>
+
+    <h3>Route Convergence &amp; Stateful Sessions</h3>
+    <ul>
+      <li>When routes change or Direct Connect / VPN fails over, how long until traffic converges? Measured or assumed?</li>
+      <li>What happens to established sessions during a failover — reset, dropped, or preserved? What about long-lived sessions such as databases and SSH?</li>
+      <li>Is failback automatic or manual? Is there any risk of route flapping?</li>
+    </ul>
+
+    <h3>Asymmetric Routing</h3>
+    <ul>
+      <li>Is there any situation where forward and return traffic could use different AZs or appliances — failover, cross-zone load balancing, appliance mode off, Direct Connect plus VPN?</li>
+      <li>How would you detect it? Do you alert on dropped invalid-state traffic?</li>
+    </ul>
+
+    <h3>Failover Testing &amp; UAT</h3>
+    <ul>
+      <li>Have failover tests been run in this environment? Which scenarios, and what were the results? (AWS Fault Injection Service or manual)</li>
+      <li>Which failover scenarios and pass/fail criteria does FAB want covered in UAT, and who signs off?</li>
+      <li>Do runbooks and alarms exist for each failure mode? Is capacity tested with one AZ down at peak?</li>
+      <li>Can a failed appliance or configuration be rebuilt quickly from IaC, images and backed-up configuration?</li>
+    </ul>
+
+    <div class="mapping"><strong>What you're mapping:</strong> [SOW workbook — HA &amp; Resilience: HAR-001 to HAR-029] + [UAT Failover Scenarios: UAT-001 to UAT-016]</div>
+    <div class="redflag"><strong>Key red flags to listen for:</strong> "We've never tested a failover" / "Recovery time isn't defined" / "It should fail over automatically" (without evidence)</div>
+  </section>
+
   <!-- LAYER 7 -->
   <section class="panel" data-tab="layer7">
     <h2 class="panel-title">Layer 7 — Compliance &amp; Governance</h2>
@@ -929,6 +1037,47 @@
     <div class="mapping"><strong>What you're mapping:</strong> [Tab 8 — Compliance &amp; Governance]</div>
   </section>
 
+  <!-- LAYER 8 -->
+  <section class="panel" data-tab="layer8">
+    <h2 class="panel-title">Layer 8 — Migration &amp; Cutover Readiness</h2>
+    <p class="prompt">"Finally, let's talk about how you get from where you are today to production on this design."</p>
+
+    <h3>Strategy &amp; Switchover</h3>
+    <ul>
+      <li>Is the migration big-bang or phased — by VPC, application or environment? Is there a pilot workload first?</li>
+      <li>What does the current internet path look like, and what exactly changes for traffic in the target design?</li>
+      <li>Is the switchover sequence documented step by step, with owners and timings? Has it been rehearsed?</li>
+      <li>What are peak traffic and connection baselines, and has the target path been load tested at peak plus headroom?</li>
+    </ul>
+
+    <h3>Rollback</h3>
+    <ul>
+      <li>Is there a documented rollback procedure? How long does it take, and has it been rehearsed?</li>
+      <li>What objective triggers would make you roll back, and who has the authority to decide?</li>
+      <li>How will you confirm service is restored after a rollback?</li>
+      <li>Is there a point of no return — for example decommissioning the old path or changing DNS or Elastic IPs?</li>
+    </ul>
+
+    <h3>Dependencies &amp; Black-Hole Windows</h3>
+    <ul>
+      <li>During route switchover, could traffic be black-holed? How long is that window, and how is it reduced (DNS TTL, BGP convergence, connection draining)?</li>
+      <li>How will established and long-lived sessions be handled during the switch?</li>
+      <li>Have new egress IPs been allow-listed with every partner and SaaS provider? Who owns that, and what are the lead times?</li>
+      <li>What else must be ready — DNS changes, certificates, licences, identity, monitoring, firewall rule migration?</li>
+    </ul>
+
+    <h3>Go / No-Go &amp; Readiness</h3>
+    <ul>
+      <li>What criteria would make you say no-go? Which are blocking, and who makes the decision?</li>
+      <li>Is security sign-off complete, and are remaining risks formally accepted?</li>
+      <li>Are the support model, runbooks and on-call rota ready? Is there a hypercare period and a post-cutover validation plan?</li>
+      <li>What change approvals and freeze windows apply?</li>
+    </ul>
+
+    <div class="mapping"><strong>What you're mapping:</strong> [SOW workbook — Migration &amp; Cutover: MIG-001 to MIG-027] + [Go-NoGo Criteria: GNG-001 to GNG-023]</div>
+    <div class="redflag"><strong>Key red flags to listen for:</strong> "Rollback hasn't been tested" / "We'll switch everything over in one weekend" / "Nobody owns the allow-list" / "We haven't defined go/no-go criteria"</div>
+  </section>
+
   <!-- CLOSING -->
   <section class="panel" data-tab="closing">
     <h2 class="panel-title">Closing the Conversation</h2>
@@ -937,6 +1086,9 @@
       <li>"Based on what we've discussed, I'll document our findings in the assessment workbook and score each area."</li>
       <li>"We'll provide you with a RAG-rated view — Red for critical gaps, Amber for partial implementation, Green for areas that meet best practices."</li>
       <li>"The deliverable will include specific remediation recommendations with owners and target dates."</li>
+      <li>"Each finding will come with evidence, impact, risk rating, recommendation, dependency and owner, and we'll record your review comments as we go."</li>
+      <li>"To validate what we heard, we'll need to see: architecture diagrams, Terraform/CloudFormation code, Transit Gateway and route table configuration, appliance configurations, flow logs, and any UAT or cutover plans."</li>
+      <li>"Who on your side owns the third-party appliances, and can we speak to the vendor contacts?"</li>
       <li>"Are there any areas we didn't cover that you'd like us to assess?"</li>
     </ul>
   </section>
@@ -946,14 +1098,16 @@
     <h2 class="panel-title">Quick Reference — Assessment Flow</h2>
     <div class="table-scroll">
     <table class="flow-table">
-      <tbody><tr><td>Layer 0: Foundation</td><td>Account Structure, Control Tower, SCPs, Guardrails</td></tr>
-      <tr><td>Layer 1: Network</td><td>VPC Design, Internet Breakout Path, Transit Gateway, DNS</td></tr>
-      <tr><td>Layer 2: Security</td><td>Network Firewall, SGs, NACLs, WAF, Egress Filtering</td></tr>
+      <tbody><tr><td>Layer 0: Foundation</td><td>Account Structure, Control Tower, SCPs, Guardrails, Design Baseline &amp; IaC</td></tr>
+      <tr><td>Layer 1: Network</td><td>VPC Design, Internet Breakout Path, Transit Gateway, IGW/NAT, ALB/NLB/GWLB, DNS, Traffic Flows &amp; Return Path</td></tr>
+      <tr><td>Layer 2: Security</td><td>Network Firewall, Third-Party Appliances (NVA, IPS/IDS, Proxy), SGs, NACLs, WAF, Egress Filtering</td></tr>
       <tr><td>Layer 3: Identity</td><td>IAM, MFA, SSO, Secrets, Least Privilege</td></tr>
       <tr><td>Layer 4: Data</td><td>Encryption, KMS, S3 Security, Backup</td></tr>
       <tr><td>Layer 5: Monitoring</td><td>CloudTrail, GuardDuty, Security Hub, Flow Logs, Config</td></tr>
       <tr><td>Layer 6: Incident Resp</td><td>IR Plan, Runbooks, Forensics, Containment, Recovery</td></tr>
+      <tr><td>Layer 6A: HA &amp; Resilience</td><td>Multi-AZ, Failure Scenarios, Convergence, Asymmetric Routing, UAT</td></tr>
       <tr><td>Layer 7: Compliance</td><td>CIS Benchmark, Well-Architected, Tagging, Audit</td></tr>
+      <tr><td>Layer 8: Cutover</td><td>Migration Strategy, Rollback, Black-Hole Windows, Go/No-Go</td></tr>
     </tbody></table>
     </div>
   </section>
