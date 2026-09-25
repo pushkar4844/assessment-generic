@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SOW Requirements - FAB AWS Cloud Internet Breakout</title>
+<style>
+  body { font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif; line-height: 1.5; margin: 0; background: #f4f6f8; color: #1a1a1a; }
+  header { background: #111; color: #eee; padding: 20px 16px; text-align: center; border-bottom: 3px solid #FF9900; }
+  header h1 { margin: 0; font-size: 1.4rem; }
+  header p { margin: 6px 0 0; color: #bbb; font-size: 0.9rem; }
+  main { max-width: 900px; margin: 0 auto; padding: 20px 16px 40px; }
+  section { background: #fff; border: 1px solid #e2e6ea; border-radius: 10px; padding: 16px 20px; margin-bottom: 16px; }
+  h2 { margin: 0 0 8px; font-size: 1.1rem; color: #b36b00; border-bottom: 2px solid #FF9900; padding-bottom: 6px; }
+  h3 { margin: 16px 0 4px; font-size: 1rem; }
+  ul { margin: 4px 0 8px; padding-left: 22px; }
+  li { margin-bottom: 4px; }
+  .table-scroll { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; min-width: 480px; font-size: 0.92rem; }
+  th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: #232f3e; color: #fff; }
+  td:first-child { width: 40px; text-align: center; }
+  @media (prefers-color-scheme: dark) {
+    body { background: #0f1216; color: #e8e8e8; }
+    section { background: #1a1f27; border-color: #2a313c; }
+    h2 { color: #FF9900; }
+    th, td { border-color: #333; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>SOW Requirements</h1>
+  <p>First Abu Dhabi Bank (FAB) &mdash; AWS Cloud Internet Breakout Technical Scope of Work</p>
+</header>
+
+<main>
+
+  <section>
+    <h2>1. Objective</h2>
+    <p>FAB requires an independent technical assessment of the AWS Cloud Internet Breakout architecture <strong>before production rollout</strong>, covering design, routing, security controls, resilience, migration readiness and key risks.</p>
+  </section>
+
+  <section>
+    <h2>2. Technical Scope of Work</h2>
+
+    <h3>2.1 Architecture Review</h3>
+    <ul>
+      <li>Review the design against FAB security, availability and operational requirements.</li>
+      <li>Validate VPCs, CIDRs, subnets and Availability Zone placement.</li>
+      <li>Assess Transit Gateway, route tables, propagation and routing controls.</li>
+      <li>DNS architecture and name resolution.</li>
+      <li>Internet Gateway and NAT Gateway design.</li>
+      <li>Application Load Balancer, Network Load Balancer and Gateway Load Balancer design.</li>
+      <li>Review Terraform or CloudFormation against the approved design.</li>
+    </ul>
+
+    <h3>2.2 Traffic Flow Validation</h3>
+    <ul>
+      <li>Review inbound, outbound and east-west traffic flows.</li>
+      <li>Validate L3/L7 paths, inspection, proxy, firewall and load-balancing dependencies.</li>
+      <li>Verify routing symmetry and return-path design.</li>
+      <li>Review service insertion and inspection flows.</li>
+      <li>Confirm security-control placement and traffic steering.</li>
+    </ul>
+
+    <h3>2.3 High Availability and Resilience Review</h3>
+    <ul>
+      <li>Review multi-Availability Zone architecture and fault-tolerance mechanisms.</li>
+      <li>Assess Availability Zone, network virtual appliance and Gateway Load Balancer target failure scenarios.</li>
+      <li>Review route convergence, recovery behavior and stateful session impact.</li>
+      <li>Identify asymmetric-routing risks.</li>
+      <li>Define practical failover scenarios and expected results for UAT.</li>
+    </ul>
+
+    <h3>2.4 Third-Party Integration Review</h3>
+    <p>Review integration with AWS networking and third-party security components, including:</p>
+    <ul>
+      <li>Network virtual appliances and firewalls.</li>
+      <li>IPS/IDS and WAF solutions.</li>
+      <li>Proxy and security inspection services.</li>
+      <li>GENEVE compatibility, health checks, routing, return paths and inspection-chain dependencies.</li>
+    </ul>
+
+    <h3>2.5 Migration and Cutover Readiness Review</h3>
+    <ul>
+      <li>Review the migration strategy and traffic switchover sequence.</li>
+      <li>Review rollback procedures, triggers and service-restoration criteria.</li>
+      <li>Identify cutover dependencies and potential traffic black-hole windows.</li>
+      <li>Define go/no-go criteria.</li>
+      <li>Provide production-readiness recommendation with risks and prerequisites.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>3. Key Deliverables</h2>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>No.</th><th>Deliverable</th><th>Minimum Content</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Architecture Assessment Report</td><td>Architecture observations, design gaps, risk rating and recommendations.</td></tr>
+          <tr><td>2</td><td>Traffic Flow Validation Report</td><td>Validated ingress, egress and return paths with identified gaps.</td></tr>
+          <tr><td>3</td><td>Resilience and Failover Review</td><td>HA assessment, failover scenarios and UAT recommendations.</td></tr>
+          <tr><td>4</td><td>Integration Risk Register</td><td>AWS and third-party interoperability risks, mitigations and ownership.</td></tr>
+          <tr><td>5</td><td>Cutover Readiness Assessment</td><td>Migration risks, rollback readiness, go/no-go criteria and recommendations.</td></tr>
+          <tr><td>6</td><td>Remediation Action Plan</td><td>Prioritized corrective actions, dependencies, proposed owners and closure evidence.</td></tr>
+          <tr><td>7</td><td>Final Presentation and KT</td><td>Management summary, technical walkthrough, Q&amp;A and editable source files.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>4. Partner Responsibilities</h2>
+    <ul>
+      <li>Assign experienced AWS network and security consultants.</li>
+      <li>Complete scope items and submit deliverables for FAB acceptance.</li>
+      <li>Include evidence, impact, risk rating, recommendation, dependency and owner for each finding.</li>
+      <li>FAB review comments are resolved or formally recorded.</li>
+      <li>Submit final reports, diagrams, risk register and editable artefacts.</li>
+    </ul>
+  </section>
+
+</main>
+</body>
+</html>
